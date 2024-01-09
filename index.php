@@ -28,12 +28,34 @@ session_start();
         .h-font {
             font-family: 'Merienda', cursive;
         }
+
+        .custom-bg {
+            background-color: #2ec1ac;
+
+        }
+
+        .custom-bg:hover {
+            background-color: #279e8c;
+        }
+
+        .availability-form {
+            margin-top: -50px;
+            z-index: 2;
+            position: relative;
+        }
+
+        @media screen and (max-width:575px) {
+            .availability-form {
+                margin-top: 25px;
+                padding: 0 35px;
+            }
+        }
     </style>
 </head>
 
 <body>
 
-
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-lg sticky-top px-lg-3 py-lg-2 ">
         <div class="container-fluid">
             <a class="navbar-brand fw-bold h-font fs-3 " href="index.php">VA9</a>
@@ -97,6 +119,8 @@ session_start();
             </div>
         </div>
     </nav>
+
+    <!-- login modal -->
     <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -132,6 +156,8 @@ session_start();
 
         </div>
     </div>
+
+    <!-- register modal -->
 
     <div class="modal fade" id="registerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -222,16 +248,10 @@ session_start();
     </div>
 
 
-
-
-
-
-
-
     <!-- carousel -->
-    <div class="container-fluid my-4">
+    <div class="container-fluid mt-4 px-lg-4">
 
-        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div id="carouselExampleFade" class="carousel slide " data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="images\IMG_15372.png" class="d-block w-100" alt="...">
@@ -264,79 +284,200 @@ session_start();
 
     </div>
 
-    <hr class="featurette-divider">
-    <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-            <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light">Rooms</h1>
-                <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-                <p>
-                    <a href="#" class="btn btn-primary my-2">Book Now</a>
-                    <a href="#" class="btn btn-secondary my-2">Contact Us</a>
-                </p>
+    <!-- check availability form -->
+    <div class="container availability-form ">
+        <div class="row">
+            <div class="col-lg-12 bg-white shadow p-4 shadow-lg rounded ">
+                <h5 class="mb-4">Check Booking Availability</h5>
+                <form>
+                    <div class="row align-items-end">
+                        <div class="col-lg-3 mb-3">
+                            <label class="form-label" style="font-weight: 500;">Check-in</label>
+                            <input type="date" class="form-control ">
+                        </div>
+
+                        <div class="col-lg-3 mb-3">
+                            <label class="form-label" style="font-weight: 500;">Check-out</label>
+                            <input type="date" class="form-control ">
+                        </div>
+
+                        <div class="col-lg-3 mb-3">
+                            <label class="form-label" style="font-weight: 500;">Adult</label>
+                            <select class="form-select">
+                                <option selected>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+
+                        <div class="col-lg-2 mb-3">
+                            <label class="form-label" style="font-weight: 500;">Children</label>
+                            <select class="form-select">
+                                <option selected>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+
+                        <div class="col-lg-1 mb-lg-3 mb-2">
+                            <button type="submit" class="btn text-white shadow-none custom-bg">Submit</button>
+                        </div>
+
+
+                    </div>
+                </form>
             </div>
         </div>
-    </section>
+    </div>
+
+    <!-- Our Rooms -->
+
+    <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">OUR ROOMS</h2>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 my-3">
+                <div class="card border-0 shadow-lg" style="max-width: 350px; margin:auto;">
+                    <img src="images\rooms\1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Simple Room</h5>
+                        <h6 class="card-title mb-4">₹200 per night</h6>
+                        <div class="features mb-4">
+                            <h6 class="mb-1">Features</h6>
+                            <span class="badge rounded-pill bg-light text-dark text-wrap lh-base">2 Rooms</span>
+                            <span class="badge rounded-pill bg-light text-dark text-wrap lh-base">2 Bathroom</span>
+                            <span class="badge rounded-pill bg-light text-dark text-wrap lh-base">1 Balcony</span>
 
 
+                        </div>
+                        <div class="facilities mb-4">
+                            <h6 class="mb-1">Facilities</h6>
+                            <span class="badge rounded-pill bg-light text-dark text-wrap lh-base">Wifi</span>
+                            <span class="badge rounded-pill bg-light text-dark text-wrap lh-base">Television</span>
+                            <span class="badge rounded-pill bg-light text-dark text-wrap lh-base">AC</span>
+                            <span class="badge rounded-pill bg-light text-dark text-wrap lh-base">Room heater</span>
+                        </div>
+                        <div class="rating mb-4">
 
-    <!-- Marketing messaging and featurettes
-  ================================================== -->
-    <!-- Wrap the rest of the page in another container to center all the content. -->
+                            <h6 class="mb-1">Rating</h6>
+                            <span class="badge rounded-pill bg-secondary">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
 
-    <div class="container marketing">
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-evenly mb-2">
+
+                            <a href="#" class="btn  text-white custom-bg shadow-none">Book Now</a>
+                            <a href="#" class="btn  btn-outline-dark  shadow-none">More Details</a>
 
 
-        <div class="row featurette">
-            <div class="col-md-7">
-                <h2 class="featurette-heading">Deluxe Rooms <span class="text-muted">It’ll blow your mind.</span></h2>
-                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt quibusdam consequuntur dolorum tempora accusamus voluptates vero rem magni veniam quia, recusandae quaerat fuga, ullam quos a quam error. Libero obcaecati, nisi modi odit quia beatae magni recusandae aliquam sequi repellendus dicta cupiditate tenetur voluptatum minus?.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-5">
-                <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" src="images\jacuzi.jpg" alt="">
 
+
+            <div class="col-lg-4 col-md-6 my-3">
+                <div class="card border-0 shadow-lg" style="max-width: 350px; margin:auto;">
+                    <img src="images\rooms\1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Simple Room</h5>
+                        <h6 class="card-title mb-4">₹200 per night</h6>
+                        <div class="features mb-4">
+                            <h6 class="mb-1">Features</h6>
+                            <span class="badge rounded-pill bg-light text-dark text-wrap lh-base">2 Rooms</span>
+                            <span class="badge rounded-pill bg-light text-dark text-wrap lh-base">2 Bathroom</span>
+                            <span class="badge rounded-pill bg-light text-dark text-wrap lh-base">1 Balcony</span>
+
+
+                        </div>
+                        <div class="facilities mb-4">
+                            <h6 class="mb-1">Facilities</h6>
+                            <span class="badge rounded-pill bg-light text-dark text-wrap lh-base">Wifi</span>
+                            <span class="badge rounded-pill bg-light text-dark text-wrap lh-base">Television</span>
+                            <span class="badge rounded-pill bg-light text-dark text-wrap lh-base">AC</span>
+                            <span class="badge rounded-pill bg-light text-dark text-wrap lh-base">Room heater</span>
+                        </div>
+                        <div class="rating mb-4">
+
+                            <h6 class="mb-1">Rating</h6>
+                            <span class="badge rounded-pill bg-secondary">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-evenly mb-2">
+
+                            <a href="#" class="btn  text-white custom-bg shadow-none">Book Now</a>
+                            <a href="#" class="btn  btn-outline-dark  shadow-none">More Details</a>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-4 col-md-6 my-3">
+                <div class="card border-0 shadow-lg" style="max-width: 350px; margin:auto;">
+                    <img src="images\rooms\1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Simple Room</h5>
+                        <h6 class="card-title mb-4">₹200 per night</h6>
+                        <div class="features mb-4">
+                            <h6 class="mb-1">Features</h6>
+                            <span class="badge rounded-pill bg-light text-dark text-wrap lh-base">2 Rooms</span>
+                            <span class="badge rounded-pill bg-light text-dark text-wrap lh-base">2 Bathroom</span>
+                            <span class="badge rounded-pill bg-light text-dark text-wrap lh-base">1 Balcony</span>
+
+
+                        </div>
+                        <div class="facilities mb-4">
+                            <h6 class="mb-1">Facilities</h6>
+                            <span class="badge rounded-pill bg-light text-dark text-wrap lh-base">Wifi</span>
+                            <span class="badge rounded-pill bg-light text-dark text-wrap lh-base">Television</span>
+                            <span class="badge rounded-pill bg-light text-dark text-wrap lh-base">AC</span>
+                            <span class="badge rounded-pill bg-light text-dark text-wrap lh-base">Room heater</span>
+                        </div>
+                        <div class="rating mb-4">
+
+                            <h6 class="mb-1">Rating</h6>
+                            <span class="badge rounded-pill bg-secondary">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-evenly mb-2">
+
+                            <a href="#" class="btn  text-white custom-bg shadow-none">Book Now</a>
+                            <a href="#" class="btn  btn-outline-dark  shadow-none">More Details</a>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 text-center mt-5">
+                <a href="#" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none">More Rooms >>></a>
             </div>
         </div>
 
-        <hr class="featurette-divider my-4">
+        
+    </div>
 
-        <div class="row featurette">
-            <div class="col-md-7 order-md-2">
-                <h2 class="featurette-heading">Premier <span class="text-muted">See for yourself.</span></h2>
-                <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
-            </div>
-            <div class="col-md-5 order-md-1">
-                <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" src="images\superior.jpg" alt="">
-
-
-            </div>
-        </div>
-
-        <hr class="featurette-divider my-4">
-
-        <div class="row featurette">
-            <div class="col-md-7">
-                <h2 class="featurette-heading">Executive Studio. <span class="text-muted">Checkmate.</span></h2>
-                <p class="lead">And yes, this is the last block of representative placeholder content. Again, not really intended to be actually read, simply here to give you a better view of what this would look like with some actual content. Your content.</p>
-            </div>
-            <div class="col-md-5">
-                <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" src="images\executive.jpg" alt="">
-
-            </div>
-        </div>
-
-        <hr class="featurette-divider">
-
-        <!-- /END THE FEATURETTES -->
-
-    </div><!-- /.container -->
-
-
-    <!-- FOOTER -->
-    <footer class="container">
-        <p class="float-end"><a href="#">Back to top</a></p>
-        <p>© 2017–2021 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
-    </footer>
+    
+    <br> <br> <br> <br> <br> <br>
 
 
 
@@ -346,7 +487,7 @@ session_start();
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
 </body>

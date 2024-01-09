@@ -75,7 +75,7 @@ if (isset($_POST['register'])) {
                 </script>
                 ";
             }
-        } elseif ($_POST['password'] != $k_POST['repeat_password']) {
+        } elseif ($_POST['password'] != $_POST['repeat_password']) {
             echo "
             <script>
             alert('Confirm Password Doest Not Match ');
