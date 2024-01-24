@@ -18,7 +18,13 @@ if (isset($_POST["login"])) {
                 $_SESSION['logged_in'] = true;
                 $_SESSION['email'] = $result_fetch['email'];
                 $_SESSION['name'] = $result_fetch['name'];
-                header("location:index.php");
+                $_SESSION['level'] = $result_fetch['level'];
+                if ($result_fetch['level'] == 1) {
+                    header("location:index.php");
+                } else if ($result_fetch['level'] == 0) {
+
+                    header("location:index.php");
+                }
             } else {
 
                 echo "
