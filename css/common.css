@@ -17,9 +17,11 @@ html{
 
 
 
-.h-font {
+.h-font{
     font-family: 'Merienda', cursive;
 }
+
+
 
 .custom-bg {
     background-color: var(--teal);
