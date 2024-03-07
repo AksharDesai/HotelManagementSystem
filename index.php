@@ -403,8 +403,7 @@ session_start();
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-8 p-4 mb-lg-0 mb-3 bg-light">
-                <iframe class="w-100 rounded" height="320px" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.43369747637!2d72.66675867535835!3d23.044556279158375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e87195782bb91%3A0x9c8c796554214ff1!2sTaj%20Residency!5e0!3m2!1sen!2sin!4v1704861306438!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
-
+                <iframe class="w-100 rounded" height="320px" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4005559853913!2d78.03727128233547!3d27.175144715877178!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1707894192085!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
 
             </div>

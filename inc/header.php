@@ -1,4 +1,6 @@
     <!-- Navbar -->
+    
+    <?php include("links.php")?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-lg sticky-top px-lg-3 py-lg-2 ">
         <div class="container-fluid">
             <a class="navbar-brand fw-bold h-font fs-3 " href="index.php">VA9</a>
@@ -33,7 +35,7 @@
 
                     
                     <div class="btn-group">
-                    <a class="nav-link active btn-outline-dark text-decoration-none shadow-none" aria-current="page" href="admin.php">Admin</a>
+                    <a class="nav-link active link-warning btn-outline-dark text-decoration-none shadow-none btn-sm " aria-current="page" target="_blank" href="admin\dashboard.php">Admin</a>
                     <button type="button" class="btn btn-outline-dark shadow-none dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
                         $_SESSION[name]
                     </button>
@@ -44,7 +46,25 @@
                     </ul>
                     </div>
                     data;
-                    } else if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
+                    }else if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['ban']==1) {
+
+                        echo <<<data
+
+                    
+                    <div class="btn-group">
+                    
+                    <button type="button" class="btn btn-outline-dark  dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                        $_SESSION[name]
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-lg-end">
+                        <li><a class="dropdown-item" href="#">Profile</b></li>
+                        <li><a class="dropdown-item" href="#">Banned</a></li>
+                        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                    </ul>
+                    </div>
+                    data;
+                    }
+                     else if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
 
                         echo <<<data
 
@@ -61,7 +81,8 @@
                     </ul>
                     </div>
                     data;
-                    } else {
+                    }  
+                    else {
                         echo <<<data
                         
                         <button type="button" class="btn btn-outline-dark shadow me-lg-3 me-2" data-bs-toggle="modal" data-bs-target="#loginModal">
@@ -106,7 +127,9 @@
                         </div>
                         <div class="d-flex align-items-center justify-content-between">
                             <button type="submit" class="btn btn-dark" name="login">LOGIN</button>
-                            <a href="javascript: void(0)" class="text-secondary text-decoration-none">Forgot Password?</a>
+                            <button type="button" class="btn btn-outline-danger text-dark border-0" data-bs-toggle="modal" data-bs-target="#forgetmodal">
+                                Forget Password ?
+                            </button>
                         </div>
 
                     </div>
@@ -150,10 +173,11 @@
                                     <label class="form-label">Phone no</label>
                                     <input type="number" class="form-control" aria-describedby="emailHelp" name="phoneno" required>
                                 </div>
-                                <!-- <div class="col-md-6 ps-0">
+
+                                <div class="col-md-6 ps-0">
                                     <label class="form-label">Picture</label>
                                     <input type="file" class="form-control" aria-describedby="emailHelp">
-                                </div> -->
+                                </div>
 
                                 <div class="col-md-12 p-0 mb-3">
                                     <div class="mb-3">
@@ -162,20 +186,20 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 p-0">
+                                <div class="col-md-6 ps-1">
                                     <label class="form-label">Pincode </label>
                                     <input type="number" class="form-control" aria-describedby="emailHelp" name="pincode" required>
                                 </div>
-                                <div class="col-md-6 ps-0">
+                                <div class="col-md-6 ps-0 ps-1">
                                     <label class="form-label">Date of Birth</label>
                                     <input type="date" class="form-control" aria-describedby="emailHelp" name="birthdate" required>
                                 </div>
-                                <div class="col-md-6 p-0">
+                                <div class="col-md-6 p-0 ps-1 my-2">
                                     <label class="form-label">Password </label>
                                     <input type="password" class="form-control" aria-describedby="emailHelp" name="password" required>
                                 </div>
 
-                                <div class="col-md-6 ps-0">
+                                <div class="col-md-6 ps-1 my-2">
                                     <label class="form-label">Confirm Password</label>
                                     <input type="password" class="form-control" aria-describedby="emailHelp" name="repeat_password">
                                 </div>
@@ -212,3 +236,42 @@
     </div>
 
     <!-- register modal ends here -->
+
+
+
+    <!-- Forget Modal Starts Here -->
+
+    <div class="modal fade" id="forgetmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header ">
+                    <h5 class="modal-title d-flex align-items-center"><i class="bi bi-person-circle fs-3 me-2"></i>Reset Password</h5>
+                    <button type="reset" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form action="forgotpassword.php" method="POST">
+                    <div class="modal-body">
+
+                        <div class="mb-3">
+                            <label class="form-label">Email address</label>
+                            <input type="email" class="form-control" aria-describedby="email" name="email" required>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-between">
+                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Go Back</button>
+                            <button type="submit" class="btn btn-dark reset" name="send-reset-link">Send</button>
+                        </div>
+
+                    </div>
+                    <br><br><br><br>
+
+
+                </form>
+            </div>
+
+
+
+        </div>
+    </div>
+    <!-- forget modal ends here -->

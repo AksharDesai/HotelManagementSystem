@@ -49,6 +49,25 @@ html{
     color: white; */
 }
 
+#dashboard-menu{
+    position: fixed;
+    height: 100%;
+}
 
+
+@media screen and (max-width:992px){
+
+    #dashboard-menu{
+        position: fixed;
+        height: auto;
+        width: 100%;
+
+    }
+    #main-content{
+        margin-top: 60px;
+    }
+
+    
+}
 
 

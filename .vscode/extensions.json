@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "visualstudioexptteam.vscodeintellicode",
+    "christian-kohler.path-intellisense",
+    "visualstudioexptteam.intellicode-api-usage-examples",
+    "zobo.php-intellisense",
+    "zignd.html-css-class-completion",
+    "brapifra.phpserver"
+  ]
+}

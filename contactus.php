@@ -15,6 +15,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VA9-Contact Us</title>
     <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <?php require('inc/links.php'); ?>
 
@@ -89,17 +90,17 @@ session_start();
             <div class="col-lg-6 col-md-6  px-4">
                 <div class="bg-white rounded shadow p-4 ">
 
-                    <form action="">
+                    <form method="post">
                         <h5 class="fw-bold">Send a message</h5>
 
                         <div class="mt-3">
                             <label class="form-label fw-bold">Name</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" name="namecontactus" required>
+                            <input type="text" class="form-control" aria-describedby="emailHelp" name="name" required>
                         </div>
 
                         <div class="mt-3">
                             <label class="form-label fw-bold">Email address</label>
-                            <input type="email" class="form-control" aria-describedby="emailHelp" name="emailcontacus" required>
+                            <input type="email" class="form-control" aria-describedby="emailHelp" name="email" required>
                         </div>
 
                         <div class="mt-3">
@@ -121,6 +122,36 @@ session_start();
 
         </div>
     </div>
+
+    <?php
+    if (isset($_POST['send'])) {
+        // $frm_data=filteration($_POST);
+
+        $q = "INSERT INTO `user_queries`( `name`, `email`, `subject`, `message`) VALUES ('$_POST[name]','$_POST[email]','$_POST[subject]','$_POST[message]')";
+
+        if (mysqli_query($con, $q)) {
+            echo <<<alert
+
+            <div class="alert alert-success fade show custom-alert role="alert">
+            <strong class="me-3">Successfully Submited Your Query</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+            </div>
+
+         
+            alert;
+        } else {
+            echo <<<alert
+
+            <div class="alert  alert-danger fade show custom-alert role="alert">
+            <strong class="me-3">Unable To Submit Your Query</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+            </div>
+
+         
+            alert;
+        }
+    }
+    ?>
 
 
 

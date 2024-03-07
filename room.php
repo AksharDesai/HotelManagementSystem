@@ -131,8 +131,8 @@ session_start();
                         </div>
 
                     </div>
+                </nav>
             </div>
-            </nav>
 
             <div class="col-lg-9 col-md-12 px-4">
 
