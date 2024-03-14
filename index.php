@@ -33,14 +33,32 @@ session_start();
                 padding: 0 35px;
             }
         }
+        .ban{
+            z-index: 1040;
+        }
+
+
+       
     </style>
 </head>
 
 <body>
 
+<?php
+    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['ban'] == 1) {
+        echo <<<alert
 
-
+        <div class="alert ban alert-danger alert-dismissible fade show position-fixed" role="alert""><i class="bi bi-exclamation-triangle-fill"></i>
+        <strong class="me-3">"Access Denied:</strong>We regret to inform you that your access to this platform has been suspended due to violations of our terms of service,If you believe this action was taken in error, please contact our support team for assistance "<a class=" me-2 text-dark " href="contactus.php">Contact Us</a>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        
+        
+        alert;
+    }
+        ?>
     <?php require('inc/header.php'); ?>
+    
 
 
     <!-- carousel -->
@@ -176,8 +194,27 @@ session_start();
                         </div>
                         <div class="d-flex justify-content-evenly mb-2">
 
-                            <a href="#" class="btn  text-white custom-bg shadow-none">Book Now</a>
-                            <a href="#" class="btn  btn-outline-dark  shadow-none">More Details</a>
+                            <?php
+                            if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['ban'] == 1) {
+                                echo <<<data
+
+                                <a href="#" class="btn  text-white  shadow-none btn-danger disabled">Can't Book</a>
+                                <a href="#" class="btn    shadow-none btn-warning">More Details</a>
+                                
+
+                                data;
+                            } else {
+
+
+                                echo <<<data
+                                
+                                
+                                <a href="" class="btn  text-white custom-bg shadow-none">Book Now</a>
+                                <a href="#" class="btn  btn-outline-dark  shadow-none">More Details</a>
+                                
+                                data;
+                            }
+                            ?>
 
 
                         </div>
@@ -225,9 +262,27 @@ session_start();
                         </div>
                         <div class="d-flex justify-content-evenly mb-2">
 
-                            <a href="#" class="btn  text-white custom-bg shadow-none">Book Now</a>
-                            <a href="#" class="btn  btn-outline-dark  shadow-none">More Details</a>
+                            <?php
+                            if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['ban'] == 1) {
+                                echo <<<data
 
+                                <a href="#" class="btn  text-white  shadow-none btn-danger disabled">Can't Book</a>
+                                <a href="#" class="btn    shadow-none btn-warning">More Details</a>
+                                
+
+                                data;
+                            } else {
+
+
+                                echo <<<data
+                                
+                                
+                                <a href="" class="btn  text-white custom-bg shadow-none">Book Now</a>
+                                <a href="#" class="btn  btn-outline-dark  shadow-none">More Details</a>
+                                
+                                data;
+                            }
+                            ?>
 
                         </div>
                     </div>
@@ -274,9 +329,27 @@ session_start();
                         </div>
                         <div class="d-flex justify-content-evenly mb-2">
 
-                            <a href="#" class="btn  text-white custom-bg shadow-none">Book Now</a>
-                            <a href="#" class="btn  btn-outline-dark  shadow-none">More Details</a>
+                            <?php
+                            if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['ban'] == 1) {
+                                echo <<<data
 
+                                <a href="#" class="btn  text-white  shadow-none btn-danger disabled">Can't Book</a>
+                                <a href="#" class="btn    shadow-none btn-warning">More Details</a>
+                                
+
+                                data;
+                            } else {
+
+
+                                echo <<<data
+                                
+                                
+                                <a href="" class="btn  text-white custom-bg shadow-none">Book Now</a>
+                                <a href="#" class="btn  btn-outline-dark  shadow-none">More Details</a>
+                                
+                                data;
+                            }
+                            ?>
 
                         </div>
                     </div>

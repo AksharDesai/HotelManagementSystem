@@ -24,10 +24,10 @@
                         <a class="nav-link text-white" href="rooms.php">Rooms</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link  text-white" href="userqueries.php">User Queries</a>
+                        <a class="nav-link  text-white" href="userqueries.php">Queries</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link  text-white" href="users.php"> Registered Users </a>
+                        <a class="nav-link  text-white" href="users.php">  Users </a>
                     </li>
 
                 </ul>

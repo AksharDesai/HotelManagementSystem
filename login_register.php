@@ -3,6 +3,22 @@
 require("connection.php");
 session_start();
 
+
+// it is the function of uploading an image vv
+function image_upload($img)
+{
+    $tmp_loc = $img['tmp_name'];
+    $new_name = random_int(11111, 99999) . $img['name'];
+
+    $new_loc = UPLOAD_SRC . $new_name;
+
+    if (!move_uploaded_file($tmp_loc, $new_loc)) {
+        header("location: index.php?alert=img_upload");
+    } else {
+        return $new_name;
+    }
+}
+
 if (isset($_POST["login"])) {
 
 
@@ -55,8 +71,16 @@ if (isset($_POST['register'])) {
 
 
 
+
     $user_exist_query = "SELECT * FROM  `registered_users` WHERE `phoneno` ='$_POST[phoneno]' OR 'email' ='$_POST[email]' ";
     $result = mysqli_query($con, $user_exist_query);
+
+
+    foreach ($_POST as $key => $value) {
+        $_POST[$key] = mysqli_real_escape_string($con, $value);
+    }
+
+    $imgpath = image_upload($_FILES['image']);
 
     if ($result) {
 
@@ -93,7 +117,7 @@ if (isset($_POST['register'])) {
 
             // maybe from here 
             $password = password_hash($_POST["password"], PASSWORD_BCRYPT);
-            $query = "INSERT INTO `registered_users` (`name`, `email`, `phoneno`, `pincode`, `birthdate`, `password`, `address`) VALUES ('$_POST[name]','$_POST[email]','$_POST[phoneno]','$_POST[pincode]','$_POST[birthdate]','$password','$_POST[address]')";
+            $query = "INSERT INTO `registered_users` (`name`,`image`, `email`, `phoneno`, `pincode`, `birthdate`, `password`, `address`) VALUES ('$_POST[name]','$imgpath','$_POST[email]','$_POST[phoneno]','$_POST[pincode]','$_POST[birthdate]','$password','$_POST[address]')";
             if (mysqli_query($con, $query)) {
 
                 echo "

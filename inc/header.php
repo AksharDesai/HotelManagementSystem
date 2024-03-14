@@ -1,6 +1,6 @@
     <!-- Navbar -->
-    
-    <?php include("links.php")?>
+
+    <?php include("links.php") ?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-lg sticky-top px-lg-3 py-lg-2 ">
         <div class="container-fluid">
             <a class="navbar-brand fw-bold h-font fs-3 " href="index.php">VA9</a>
@@ -46,7 +46,7 @@
                     </ul>
                     </div>
                     data;
-                    }else if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['ban']==1) {
+                    } else if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['ban'] == 1) {
 
                         echo <<<data
 
@@ -63,8 +63,7 @@
                     </ul>
                     </div>
                     data;
-                    }
-                     else if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
+                    } else if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
 
                         echo <<<data
 
@@ -81,8 +80,7 @@
                     </ul>
                     </div>
                     data;
-                    }  
-                    else {
+                    } else {
                         echo <<<data
                         
                         <button type="button" class="btn btn-outline-dark shadow me-lg-3 me-2" data-bs-toggle="modal" data-bs-target="#loginModal">
@@ -156,7 +154,7 @@
                     <button type="reset" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form action="login_register.php" method="post">
+                <form action="login_register.php" method="post" enctype="multipart/form-data">
                     <div class="modal-body">
                         <span class="badge bg-light text-dark lh-base text-wrap mb-3">Note: Yours details must match with your ID . That will be required at the time of your check-in</span>
                         <div class="container-fluid">
@@ -175,8 +173,8 @@
                                 </div>
 
                                 <div class="col-md-6 ps-0">
-                                    <label class="form-label">Picture</label>
-                                    <input type="file" class="form-control" aria-describedby="emailHelp">
+                                    <label class="input-group-text">Picture</label>
+                                    <input type="file" class="form-control" name="image" accept=".jpg,.png,.jpeg,.svg">
                                 </div>
 
                                 <div class="col-md-12 p-0 mb-3">
