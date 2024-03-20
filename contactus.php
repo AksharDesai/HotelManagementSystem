@@ -28,6 +28,14 @@ session_start();
         .h-font {
             font-family: 'Merienda', cursive !important;
         }
+        .ban {
+            margin-top: -64px;
+            z-index: 2;
+            position: relative;
+        }
+        .ban{
+            z-index: 1040;
+        }
     </style>
 
 
@@ -39,6 +47,22 @@ session_start();
 
 
     <?php require('inc/header.php'); ?>
+
+    <?php
+    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['ban'] == 1) {
+        echo <<<alert
+
+        <div class="alert ban alert-danger alert-dismissible fade show position-fixed" role="alert""><i class="bi bi-exclamation-triangle-fill"></i>
+        <strong class="me-3">"Access Denied:</strong>We regret to inform you that your access to this platform has been suspended due to violations of our terms of service,If you believe this action was taken in error, please contact our support team for assistance "<a class=" me-2 text-dark " href="contactus.php">Contact Us</a>
+
+        </div>
+        
+        
+        alert;
+    }
+        ?>
+
+
 
 
     <div class="my-5 px-4">

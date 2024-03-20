@@ -19,7 +19,7 @@ function image_upload($img)
 ?>
 
 
-?>
+
 
 
 <!DOCTYPE html>
@@ -226,6 +226,8 @@ function image_upload($img)
 
 
     <?php require('inc/footer.php'); ?>
+
+
 
 
 

@@ -35,12 +35,12 @@
 
                     
                     <div class="btn-group">
-                    <a class="nav-link active link-warning btn-outline-dark text-decoration-none shadow-none btn-sm " aria-current="page" target="_blank" href="admin\dashboard.php">Admin</a>
+                    <a class="nav-link active link-warning btn-outline-dark text-decoration-none shadow-none btn-sm " aria-current="page" target="_blank" href="admin\settings.php">Admin</a>
                     <button type="button" class="btn btn-outline-dark shadow-none dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
                         $_SESSION[name]
                     </button>
                     <ul class="dropdown-menu dropdown-menu-lg-end">
-                        <li><a class="dropdown-item" href="#">Profile</b></li>
+                        <li><a class="dropdown-item" href="profile.php">Profile</a></li>
                         <li><a class="dropdown-item" href="#">Booking</a></li>
                         <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                     </ul>
@@ -57,7 +57,7 @@
                         $_SESSION[name]
                     </button>
                     <ul class="dropdown-menu dropdown-menu-lg-end">
-                        <li><a class="dropdown-item" href="#">Profile</b></li>
+                        <li><a class="dropdown-item" href="profile.php">Profile</b></li>
                         <li><a class="dropdown-item" href="#">Banned</a></li>
                         <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                     </ul>
@@ -74,7 +74,7 @@
                         $_SESSION[name]
                     </button>
                     <ul class="dropdown-menu dropdown-menu-lg-end">
-                        <li><a class="dropdown-item" href="#">Profile</b></li>
+                        <li><a class="dropdown-item" href="profile.php">Profile</b></li>
                         <li><a class="dropdown-item" href="#">Booking</a></li>
                         <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                     </ul>

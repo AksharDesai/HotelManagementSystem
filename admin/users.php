@@ -9,6 +9,24 @@
 
     <?php require('C:\xampp\htdocs\hello\inc\links.php'); ?>
 
+    <style>
+        .flex-heading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .addroom-button {
+            padding-left: 500px;
+            padding-right: 500px;
+            font-size: 20px;
+            /* width:800px; */
+            border: solid 1px black;
+
+        }
+    </style>
+
 </head>
 
 <body class="bg-light ">
@@ -19,10 +37,10 @@
 
     <div class="container-fluid " id="main-content">
         <div class="row">
-            <div class="col-lg-10 ms-auto p-4">
+            <div class="col-lg-10 ms-auto p-4 flex-heading">
 
 
-                <h3 class="mb-4">Registered Users</h3>
+                <h3 class="mb-4 btn btn-warning addroom-button addroom-button"><i class="bi bi-person-badge"></i> Registered Users</h3>
 
                 <hr>
 
@@ -44,7 +62,7 @@
 
         <div class=" col-lg-10 ms-auto p-0 ">
             <table class=" table table-hover text-center ">
-                <thead class=" bg-success text-light">
+                <thead class=" bg-dark text-light">
         <tr>
             <th scope="col" class="rounded-start">Sr.No</th>
             <th scope="col">Image</th>
@@ -72,10 +90,10 @@
 
                 if ($isBanned) {
                     // If the user is banned, store HTML for the "Unban" button
-                    $buttonHTML = '<button onclick="confirm_rem2(' . $fetch['user_id'] . ', false)" class="btn btn-warning"><i class="bi bi-arrow-clockwise"></i> Unban</button>';
+                    $buttonHTML = '<button onclick="confirm_rem2(' . $fetch['user_id'] . ', false)" class="btn btn-success"><i class="bi bi-arrow-clockwise"></i> Unban</button>';
                 } else {
                     // If the user is not banned, store HTML for the "Ban" button
-                    $buttonHTML = '<button onclick="confirm_rem(' . $fetch['user_id'] . ', true)" class="btn btn-danger"><i class="bi bi-exclamation-triangle-fill"></i> Ban</button>';
+                    $buttonHTML = '<button onclick="confirm_rem(' . $fetch['user_id'] . ', true)" class="btn btn-danger text-white"><i class="bi bi-exclamation-triangle-fill text-dark"></i> Ban</button>';
                 }
 
 

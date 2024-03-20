@@ -43,15 +43,41 @@ session_start();
 </head>
 
 <body>
+<?php
+                            
+                            
+                            $query = "SELECT * FROM  `shutdown_status` ";
+                            $result = mysqli_query($con, $query);
+                            $i = 0;
+                            
+                            while ($fetch = mysqli_fetch_assoc($result)) {
+                                
+                                
+                                
+                                $isshut = $fetch['is_shutdown'];
+                            }
+                            ?>
+
+
 
 <?php
+      
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['ban'] == 1) {
         echo <<<alert
 
         <div class="alert ban alert-danger alert-dismissible fade show position-fixed" role="alert""><i class="bi bi-exclamation-triangle-fill"></i>
         <strong class="me-3">"Access Denied:</strong>We regret to inform you that your access to this platform has been suspended due to violations of our terms of service,If you believe this action was taken in error, please contact our support team for assistance "<a class=" me-2 text-dark " href="contactus.php">Contact Us</a>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
         </div>
+        
+        
+        alert;
+    }
+    else if ($isshut==1) {
+        echo <<<alert
+                <div class="alert alert-warning text-center" role="alert">
+                <i class="bi bi-building-fill-lock text-dark"></i> Sorry For Now All Rooms Are Booked
+            </div>
         
         
         alert;
@@ -103,6 +129,8 @@ session_start();
     <div class="container availability-form ">
         <div class="row">
             <div class="col-lg-12 bg-white shadow p-4 shadow-lg rounded ">
+
+          
                 <h5 class="mb-4">Check Booking Availability</h5>
                 <form>
                     <div class="row align-items-end">
@@ -157,7 +185,7 @@ session_start();
         <div class="row">
             <div class="col-lg-4 col-md-6 my-3">
                 <div class="card border-0 shadow-lg" style="max-width: 350px; margin:auto;">
-                    <img src="images\rooms\1.jpg" class="card-img-top" alt="...">
+                    <img src="images\upload from here\1.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Simple Room</h5>
                         <h6 class="card-title mb-4">₹200 per night</h6>
@@ -195,7 +223,16 @@ session_start();
                         <div class="d-flex justify-content-evenly mb-2">
 
                             <?php
-                            if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['ban'] == 1) {
+                            if ($isshut==1) {
+                                echo <<<alert
+                        
+                                <a href="#" class="btn  text-white  shadow-none btn-danger disabled">Booking Full</a>
+                                <a href="#" class="btn    shadow-none btn-warning">More Details</a>
+                                
+                                
+                                alert;
+                            }
+                            else if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['ban'] == 1) {
                                 echo <<<data
 
                                 <a href="#" class="btn  text-white  shadow-none btn-danger disabled">Can't Book</a>
@@ -225,7 +262,7 @@ session_start();
 
             <div class="col-lg-4 col-md-6 my-3">
                 <div class="card border-0 shadow-lg" style="max-width: 350px; margin:auto;">
-                    <img src="images\rooms\1.jpg" class="card-img-top" alt="...">
+                    <img src="images\upload from here\1.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Simple Room</h5>
                         <h6 class="card-title mb-4">₹200 per night</h6>
@@ -263,7 +300,16 @@ session_start();
                         <div class="d-flex justify-content-evenly mb-2">
 
                             <?php
-                            if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['ban'] == 1) {
+                               if ($isshut==1) {
+                                echo <<<alert
+                        
+                                <a href="#" class="btn  text-white  shadow-none btn-danger disabled">Booking Full</a>
+                                <a href="#" class="btn    shadow-none btn-warning">More Details</a>
+                                
+                                
+                                alert;
+                            }
+                            else if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['ban'] == 1) {
                                 echo <<<data
 
                                 <a href="#" class="btn  text-white  shadow-none btn-danger disabled">Can't Book</a>
@@ -292,7 +338,7 @@ session_start();
 
             <div class="col-lg-4 col-md-6 my-3">
                 <div class="card border-0 shadow-lg" style="max-width: 350px; margin:auto;">
-                    <img src="images\rooms\1.jpg" class="card-img-top" alt="...">
+                    <img src="images\upload from here\1.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Simple Room</h5>
                         <h6 class="card-title mb-4">₹200 per night</h6>
@@ -330,7 +376,16 @@ session_start();
                         <div class="d-flex justify-content-evenly mb-2">
 
                             <?php
-                            if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['ban'] == 1) {
+                               if ($isshut==1) {
+                                echo <<<alert
+                        
+                                <a href="#" class="btn  text-white  shadow-none btn-danger disabled">Booking Full</a>
+                                <a href="#" class="btn    shadow-none btn-warning">More Details</a>
+                                
+                                
+                                alert;
+                            }
+                            else if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['ban'] == 1) {
                                 echo <<<data
 
                                 <a href="#" class="btn  text-white  shadow-none btn-danger disabled">Can't Book</a>

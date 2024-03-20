@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +14,21 @@
     <?php require('C:\xampp\htdocs\hello\inc\links.php'); ?>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"> -->
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"> -->
+    <style>
+
+        .flex-heading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+        .addroom-button{
+            padding-left: 500px;
+            padding-right: 500px;
+            font-size: 25px;
+            border: solid 1px black;
+        }
+        </style>
 </head>
 
 <body class="bg-light ">
@@ -20,10 +39,10 @@
 
     <div class="container-fluid " id="main-content">
         <div class="row">
-            <div class="col-lg-10 ms-auto p-4">
+            <div class="col-lg-10 ms-auto p-4 flex-heading">
 
 
-                <h3 class="mb-4">User Queries</h3>
+                <h3 class="mb-4 btn btn-warning addroom-button addroom-button"><i class="bi bi-person-fill-exclamation"></i> User Queries</h3>
 
                 <hr>
 
@@ -62,6 +81,7 @@
             $i = 1;
 
             while ($fetch = mysqli_fetch_assoc($result)) {
+                
                 echo <<<product
                         
                         
@@ -71,7 +91,7 @@
                         <td>$fetch[email]</td>
                         <td>$fetch[subject]</td>
                         <td>$fetch[message]</td>
-                        <td><button onclick="confirm_rem($fetch[sr_no])" class="btn btn-warning "><i class="bi bi-eye ">  Seen</i></button></td>
+                        <td><button onclick="confirm_rem($fetch[sr_no])" class="btn btn-danger text-light "><i class="bi bi-eye-slash-fill text-dark "></i>  Seen</button></td>
                         
                         
                         </tr>

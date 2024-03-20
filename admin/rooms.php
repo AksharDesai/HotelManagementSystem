@@ -32,15 +32,20 @@ function image_upload($img)
     <link rel="stylesheet" href="admin\css\common.css">
 
     <style>
-
-        .flex-heading{
+        .flex-heading {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
 
-        }
-      
 
+        }
+
+        .addroom-button {
+            padding-left: 500px;
+            padding-right: 500px;
+            font-size: 25px;
+            border: solid 1px black;
+        }
     </style>
 
 </head>
@@ -51,17 +56,17 @@ function image_upload($img)
     <?php require("inc\header.php"); ?>
     <?php require('inc\connection.php'); ?>
 
-    <div class="container-fluid bg-secondary" id="main-content">
+    <div class="container-fluid " id="main-content">
         <div class="row">
             <div class="col-lg-10 ms-auto p-4 flex-heading">
 
 
-               
+
 
                 <!-- add room modal starts form here -->
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#addroom">
-                    Add Room
+                <button type="button" class="btn btn-warning addroom-button" data-toggle="modal" data-target="#addroom">
+                    <i class="bi bi-house-gear-fill"></i> Add Room
                 </button>
 
                 <!-- Modal -->
@@ -102,7 +107,7 @@ function image_upload($img)
                                             <label class="form-label fw-bold">Children</label>
                                             <input type="number" name="children" class="form-control shadow-none" required>
                                         </div>
-                                        <div class="col-md-12 ps-0">
+                                        <div class="col-md-12 ps-0 mb-3">
                                             <label class="input-group-text">Picture</label>
                                             <input type="file" class="form-control" name="image" accept=".jpg,.png,.jpeg,.svg">
                                         </div>
@@ -201,8 +206,8 @@ function image_upload($img)
 
                     $facilities = $_POST['facilities'];
                     $features = $_POST['features'];
-                    $facilities1 = implode(",", $facilities);
-                    $features1 = implode(",", $features);
+                    $facilities1 = implode(" | ", $facilities);
+                    $features1 = implode(" | ", $features);
 
 
 
@@ -245,7 +250,7 @@ function image_upload($img)
 
         <div class=" col-lg-10 ms-auto p-0 ">
             <table class=" table table-hover text-center ">
-                <thead class=" bg-success text-light">
+                <thead class=" bg-dark text-light">
         <tr>
             <th scope="col">Sr.No</th>
             <th scope="col">Image</th>
@@ -267,18 +272,7 @@ function image_upload($img)
             $fetch_srcrad = FETCH_SRCrad;
             while ($fetch = mysqli_fetch_assoc($result)) {
 
-                // $isBanned = $fetch['ban'];
-
-                // // Initialize the variable to store the button HTML
-                // $buttonHTML = '';
-
-                // if ($isBanned) {
-                //     // If the user is banned, store HTML for the "Unban" button
-                //     $buttonHTML = '<button onclick="confirm_rem2(' . $fetch['user_id'] . ', false)" class="btn btn-warning"><i class="bi bi-arrow-clockwise"></i> Unban</button>';
-                // } else {
-                //     // If the user is not banned, store HTML for the "Ban" button
-                //     $buttonHTML = '<button onclick="confirm_rem(' . $fetch['user_id'] . ', true)" class="btn btn-danger"><i class="bi bi-exclamation-triangle-fill"></i> Ban</button>';
-                // }
+             
 
 
                 echo <<<product
@@ -295,8 +289,8 @@ function image_upload($img)
                         <td>$fetch[facilities]</td>
 
                         <td>$fetch[Description]</td> 
-                        <td><button onclick="confirm_rem($fetch[room_id])" class="btn btn-danger "><i class="bi bi-eye ">Delete</i></button></td>
-                         
+                        <td><button onclick="confirm_rem($fetch[room_id])" class="btn btn-danger text-light "><i class="bi bi-trash3-fill  text-dark"></i> Delete</button></td>
+                        
                         
                         
                     
@@ -312,7 +306,7 @@ function image_upload($img)
             ?>
 
             <?php
-            
+
             ?>
 
             <?php
@@ -347,7 +341,7 @@ function image_upload($img)
             }
 
             ?>
-            
+
 
 
         </tbody>
@@ -368,6 +362,32 @@ function image_upload($img)
             }
 
         }
+    </script>
+    <script>
+        $(document).ready(function() {
+            // Function to display Bootstrap alert message
+            function showAlert(message, alertType) {
+                var alertDiv = $('<div class="alert alert-' + alertType + ' alert-dismissible fade show" role="alert">' +
+                    message +
+                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                    '<span aria-hidden="true">&times;</span>' +
+                    '</button>' +
+                    '</div>');
+
+                // Append the alert to the alert placeholder
+                $('#alert_placeholder').append(alertDiv);
+
+                // Automatically close the alert after 3 seconds
+                setTimeout(function() {
+                    alertDiv.alert('close');
+                }, 3000);
+            }
+
+            // Example usage
+            showAlert('This is a success message.', 'success');
+            showAlert('This is a warning message.', 'warning');
+            showAlert('This is an error message.', 'danger');
+        });
     </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

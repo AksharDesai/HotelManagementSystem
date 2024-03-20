@@ -36,6 +36,7 @@ if (isset($_POST["login"])) {
                 $_SESSION['name'] = $result_fetch['name'];
                 $_SESSION['level'] = $result_fetch['level'];
                 $_SESSION['ban'] = $result_fetch['ban'];
+              
                 if ($result_fetch['level'] == 1) {
                     header("location:index.php");
                 } else if ($result_fetch['level'] == 0) {
