@@ -3,13 +3,15 @@
 
 session_start();
 
+require('C:\xampp\htdocs\hello\inc\links.php');
+require('inc\connection.php');
+
 
 // it is the function of uploading an image vv
 function image_upload($img)
 {
     $tmp_loc = $img['tmp_name'];
     $new_name = random_int(11111, 99999) . $img['name'];
-
     $new_loc = UPLOAD_SRC1 . $new_name;
 
     if (!move_uploaded_file($tmp_loc, $new_loc)) {
@@ -18,6 +20,49 @@ function image_upload($img)
         return $new_name;
     }
 }
+if (isset($_GET['rem']) && $_GET['rem'] > 0) {
+    $room_id = $_GET['rem'];
+
+    // Fetch room information
+    $query = "SELECT * FROM `rooms` WHERE `room_id`='$room_id'";
+    $result = mysqli_query($con, $query);
+    $fetch = mysqli_fetch_assoc($result);
+
+    // Delete the image file from the server
+    $imageFilePath = UPLOAD_SRC1 . $fetch['image'];
+    if (file_exists($imageFilePath) && unlink($imageFilePath)) {
+        // If image deletion is successful, proceed to delete room information
+        $delete_query = "DELETE FROM `rooms` WHERE `room_id`='$room_id'";
+        if (mysqli_query($con, $delete_query)) {
+            echo <<<alert
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong class="me-3">Room Deleted Successfully</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            alert;
+            // Redirect back to rooms.php after deletion
+            header("Location: rooms.php");
+            exit();
+        } else {
+            echo <<<alert2
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong class="me-3">Failed to delete room information</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            alert2;
+        }
+    } else {
+        echo <<<alert3
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong class="me-3">Failed to delete image file</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        alert3;
+    }
+}
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +73,7 @@ function image_upload($img)
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel-Dashboard</title>
 
-    <?php require('C:\xampp\htdocs\hello\inc\links.php'); ?>
+
     <link rel="stylesheet" href="admin\css\common.css">
 
     <style>
@@ -46,6 +91,11 @@ function image_upload($img)
             font-size: 25px;
             border: solid 1px black;
         }
+
+        .apna {
+            object-fit: cover;
+            object-position: center;
+        }
     </style>
 
 </head>
@@ -54,7 +104,7 @@ function image_upload($img)
 
 
     <?php require("inc\header.php"); ?>
-    <?php require('inc\connection.php'); ?>
+
 
     <div class="container-fluid " id="main-content">
         <div class="row">
@@ -197,6 +247,137 @@ function image_upload($img)
 
                 <!--  above add  room modal ends here  -->
 
+                <!-- edit modal starts from here -->
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="editroom" tabindex="-1" role="dialog" aria-labelledby="addroomTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title bg-dark text-light p-2 w-100 text-center" id="addroomTitle">Edit Room Details</h5>
+
+                            </div>
+                            <div class="modal-body">
+
+                                <form action="rooms.php" method="POST" enctype="multipart/form-data">
+
+                                    <div class="row">
+
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label fw-bold">Name</label>
+                                            <input type="text" name="name" id="editname" class="form-control shadow-none" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label fw-bold">Area</label>
+                                            <input type="number" name="area" id="editarea" class="form-control shadow-none" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label fw-bold">Price</label>
+                                            <input type="number" name="price" id="editprice" class="form-control shadow-none" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label fw-bold">Quantity</label>
+                                            <input type="number" name="quantity" id="editquantity" class="form-control shadow-none" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label fw-bold">Adult</label>
+                                            <input type="number" name="adult" id="editadult" class="form-control shadow-none" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label fw-bold">Children</label>
+                                            <input type="number" name="children" id="editchildren" class="form-control shadow-none" required>
+                                        </div>
+                                        <img src=" " id="editimg" alt="" width="200px" height="200px" class="mb-3 apna"> <br>
+                                        <div class="col-md-12 ps-0 mb-3">
+                                            <label class="input-group-text">Picture</label>
+                                            <input type="file" class="form-control" name="image" id="editimage" accept=".jpg,.png,.jpeg,.svg">
+                                        </div>
+                                        <input type="hidden" name="room_id" id="editrid">
+                                        <div class="mb-3 col-12">
+
+
+                                            <label class="form-label fw-bold">Features</label>
+
+
+                                            <div class="row">
+                                                <div class="col-md-3 mb-1">
+                                                    <label class="form-label">bathroom</label>
+                                                    <input type="checkbox" name="features[]" id="editfeatures[]" class="form-check-input shadow-none" value="bathroom">
+
+
+                                                </div>
+                                                <div class="col-md-3 mb-1">
+                                                    <label class="form-label">bedroom</label>
+                                                    <input type="checkbox" name="features[]" id="editfeatures[]" class="form-check-input shadow-none" value="bedroom">
+
+
+                                                </div>
+                                                <div class="col-md-3 mb-1">
+                                                    <label class="form-label">balcony</label>
+                                                    <input type="checkbox" name="features[]" id="editfeatures[]" class="form-check-input shadow-none" value="balcony">
+
+
+                                                </div>
+
+
+
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 col-12">
+
+                                            <label class="form-label fw-bold">Facilities</label>
+                                            <div class="row">
+                                                <div class="col-md-3 mb-1">
+                                                    <label>Wifi</label>
+                                                    <input type="checkbox" name="facilities[]" id="editfacilities[]" value="wifi" class="form-check-input shadow-none">
+
+
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label>AC</label>
+                                                    <input type="checkbox" name="facilities[]" id="editfacilities[]" value="ac" class="form-check-input shadow-none">
+
+
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label> Room Heater</label>
+                                                    <input type="checkbox" name="facilities[]" id="editfacilities[]" value="room heater" class="form-check-input shadow-none">
+
+
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label>Television</label>
+                                                    <input type="checkbox" name="facilities[]" id="editfacilities[]" value="television" class="form-check-input shadow-none">
+
+
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label>Spa</label>
+                                                    <input type="checkbox" name="facilities[]" id="editfacilities[]" value="spa" class="form-check-input shadow-none">
+
+
+                                                </div>
+                                                <div class="col-12 ">
+                                                    <label class="form-label fw-bold">Description</label>
+                                                    <textarea name="desc" id="editdesc" rows="4" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-dark text-light" data-dismiss="modal">Close</button>
+
+                                        <button type="submit" class="btn btn-success my-1" name="editroom">Save Changes</button>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <!-- the insertion of the data from the above modal into rooms table code begins from here -->
 
                 <?php
@@ -215,22 +396,23 @@ function image_upload($img)
 
 
 
-                    $add_query = "INSERT INTO `rooms`(`image`,`name`, `price`, `adult`, `children`, `features`, `facilities`, `Description`) VALUES ('$imgpath','$_POST[name]','$_POST[price]','$_POST[adult]','$_POST[children]','$features1','$facilities1','$_POST[desc]')";
+                    // $add_query = "INSERT INTO `rooms`(`image`,`name`, `price`, `adult`, `children`, `features`, `facilities`, `Description`) VALUES ('$imgpath','$_POST[name]','$_POST[price]','$_POST[adult]','$_POST[children]','$features1','$facilities1','$_POST[desc]')";
+                    $add_query = "INSERT INTO `rooms`(`image`, `name`, `area`, `quantity`, `price`, `adult`, `children`, `features`, `facilities`, `Description`) VALUES ('$imgpath','$_POST[name]','$_POST[area]','$_POST[quantity]','$_POST[price]','$_POST[adult]','$_POST[children]','$features1','$facilities1','$_POST[desc]')";
                     if (mysqli_query($con, $add_query)) {
 
                         echo "
-                    <script>
-                    alert('Room Added ');
-                    window.location.href='rooms.php';
-                    </script>
-                    ";
+    <script>
+    alert('Room Added ');
+    window.location.href='rooms.php';
+    </script>
+    ";
                     } else {
                         echo "
-                    <script>
-                    alert('cannot run query');
-                    window.location.href='rooms.php';
-                    </script>
-                    ";
+    <script>
+    alert('cannot run query');
+    window.location.href='rooms.php';
+    </script>
+    ";
                     }
                 }
 
@@ -246,11 +428,11 @@ function image_upload($img)
         </div>
     </div>
     <div class="container-fluid  " id=" main-content" ">
-        <div class=" row " >
+<div class=" row " >
 
-        <div class=" col-lg-10 ms-auto p-0 ">
-            <table class=" table table-hover text-center ">
-                <thead class=" bg-dark text-light">
+<div class=" col-lg-10 ms-auto p-0 ">
+<table class=" table table-hover text-center ">
+<thead class=" bg-dark text-light">
         <tr>
             <th scope="col">Sr.No</th>
             <th scope="col">Image</th>
@@ -272,75 +454,43 @@ function image_upload($img)
             $fetch_srcrad = FETCH_SRCrad;
             while ($fetch = mysqli_fetch_assoc($result)) {
 
-             
+
 
 
                 echo <<<product
-                        
-                        
-                        <tr>
-                        <th scope="row">$i</th>
-                        <td><img src="$fetch_srcrad$fetch[image] " width="150px" height="100px" "></td>
-                        <td>$fetch[name]</td>
-                        <td>$fetch[price]</td>
-                        <td>$fetch[adult]</td>
-                        <td>$fetch[children]</td>
-                        <td>$fetch[features]</td>
-                        <td>$fetch[facilities]</td>
+        
+        
+        <tr>
+        <th scope="row">$i</th>
+        <td><img src="$fetch_srcrad$fetch[image] " width="150px" height="100px" "></td>
+        <td>$fetch[name]</td>
+        <td>$fetch[price]</td>
+        <td>$fetch[adult]</td>
+        <td>$fetch[children]</td>
+        <td>$fetch[features]</td>
+        <td>$fetch[facilities]</td>
 
-                        <td>$fetch[Description]</td> 
-                        <td><button onclick="confirm_rem($fetch[room_id])" class="btn btn-danger text-light "><i class="bi bi-trash3-fill  text-dark"></i> Delete</button></td>
-                        
-                        
-                        
-                    
-                        
-                        </tr>
-                        
-            
-                        product;
+        <td>$fetch[Description]</td> 
+        <td><button onclick="confirm_rem($fetch[room_id])" class="btn btn-danger text-light "><i class="bi bi-trash3-fill  text-light"></i></button>  <a href="?edit=$fetch[room_id]" class="btn btn-success mt-1 "><i class="bi bi-bookmark-plus-fill text-dark fw-5  "></i></a></td>
+        
+        
+        
+        
+    
+        
+        </tr>
+        
+
+        product;
                 $i++;
             }
 
 
             ?>
 
-            <?php
 
-            ?>
 
-            <?php
 
-            if (isset($_GET['rem']) && $_GET['rem'] > 0) {
-                $query = "SELECT * FROM `rooms` WHERE `room_id`='$_GET[rem]'";
-                $result = mysqli_query($con, $query);
-                $fetch = mysqli_fetch_assoc($result);
-
-                $query = "DELETE  FROM `rooms` WHERE `room_id`='$_GET[rem]'";
-                if (mysqli_query($con, $query)) {
-                    echo <<<alert
-
-        <div class="alert alert-warning alert-dismissible fade show" role="alert"">
-        <strong class="me-3">Done</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-
-     
-        alert;
-                } else {
-                    echo <<<alert2
-
-        <div class="alert alert-warning alert-dismissible fade show" role="alert"">
-        <strong class="me-3">Sorry</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-
-     
-        alert2;
-                }
-            }
-
-            ?>
 
 
 
@@ -349,6 +499,49 @@ function image_upload($img)
     </div>
     </div>
     </div>
+
+
+    <!-- the insertion of data ends here -->
+
+
+
+    <!-- edit modal ends from here -->
+
+    <?php
+
+    if (isset($_GET['edit']) && $_GET['edit'] > 0) {
+        $room_id = $_GET['edit'];
+        $query = "SELECT * FROM `rooms` WHERE `room_id` = ?";
+        $stmt = mysqli_prepare($con, $query);
+        mysqli_stmt_bind_param($stmt, "i", $room_id);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $fetch = mysqli_fetch_assoc($result);
+
+        echo "
+        <script>
+            var editroom = new bootstrap.Modal(document.getElementById('editroom'),{
+                keyboard:false
+            });
+            document.querySelector('#editname').value = `$fetch[name]`;
+            document.querySelector('#editarea').value = `$fetch[area]`;
+            document.querySelector('#editquantity').value = `$fetch[quantity]`;
+            document.querySelector('#editprice').value = `$fetch[price]`;
+            document.querySelector('#editadult').value = `$fetch[adult]`;
+            document.querySelector('#editchildren').value = `$fetch[children]`;
+            
+            document.querySelector('#editimg').src = '$fetch_srcrad$fetch[image]';
+            document.querySelector('#editdesc').value = `$fetch[Description]`;
+            document.querySelector('#editrid').value = `$fetch[room_id]`;
+            
+            
+            editroom.show();
+        </script>";
+    }
+
+
+
+    ?>
 
 
 
