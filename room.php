@@ -3,6 +3,7 @@
 require('connection.php');
 session_start();
 
+
 function image_upload($img)
 {
     $tmp_loc = $img['tmp_name'];
@@ -66,7 +67,7 @@ function image_upload($img)
         <div class="row">
             <div class="col-lg-3 col-md-12 mb-4 mb-lg-0 px-lg-0">
                 <nav class="navbar navbar-expand-lg navbar-light bg-white rounded shadow">
-                    <div class="container-fluid flex-lg-column align-items-stretch">
+                    <div class="container-fluid flex-lg-column align-items-stretch ">
                         <h4 class="mt-2">Filters</h4>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#filterdropdown" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -155,14 +156,21 @@ function image_upload($img)
 
                 <?php
 
+
+
                 $query = "SELECT * FROM  `rooms` ";
                 $result = mysqli_query($con, $query);
                 $i = 1;
                 $fetch_srcrad = FETCH_SRCrad;
+
                 while ($fetch = mysqli_fetch_assoc($result)) {
 
 
+
+
+
                     echo <<<mogambo
+                                             
                                             <div class="card mb-4 border-0 shadow">
                                                 <div class="row g-0 p-3 align-items-center">
                                                     <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
@@ -191,20 +199,32 @@ function image_upload($img)
                                                     </div>
                                                     <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
                                                         <h6 class="card-title mb-4">$$fetch[price] per night</h6>
-                                                        
-                                                        <a href="" class="btn  text-white custom-bg shadow-none mb-2">Book Now</a>
+
+                                                         
+
+                                                        <br>
+                                                       
+                                                        <a href="bookings.php?room_id=$fetch[room_id];&price=$fetch[price];" class="btn text-white custom-bg shadow-none mb-2">Book Now</a>
                                                         <a href="#" class="btn  btn-outline-dark  shadow-none">More Details</a>
                                                             
                                                             
                                                         
                                                         
                                                         
+                                                       
                                                         
                                                         </div>
                                                         </div>
                                                         </div>
                                                     
                                             mogambo;
+                    // $_SESSION['room_id'] = $fetch['room_id'];
+
+
+
+                    $_SESSION['price'] = $fetch['price'];
+
+
 
 
 

@@ -33,47 +33,44 @@ session_start();
                 padding: 0 35px;
             }
         }
-        .ban{
+
+        .ban {
             z-index: 1040;
         }
-
-
-       
     </style>
 </head>
 
 <body>
-<?php
-                            
-                            
-                            $query = "SELECT * FROM  `shutdown_status` ";
-                            $result = mysqli_query($con, $query);
-                            $i = 0;
-                            
-                            while ($fetch = mysqli_fetch_assoc($result)) {
-                                
-                                
-                                
-                                $isshut = $fetch['is_shutdown'];
-                            }
-                            ?>
+    <?php
+
+
+    $query = "SELECT * FROM  `shutdown_status` ";
+    $result = mysqli_query($con, $query);
+    $i = 0;
+
+    while ($fetch = mysqli_fetch_assoc($result)) {
 
 
 
-<?php
-      
+        $isshut = $fetch['is_shutdown'];
+    }
+    ?>
+
+
+
+    <?php
+
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['ban'] == 1) {
         echo <<<alert
 
         <div class="alert ban alert-danger alert-dismissible fade show position-fixed" role="alert""><i class="bi bi-exclamation-triangle-fill"></i>
         <strong class="me-3">"Access Denied:</strong>We regret to inform you that your access to this platform has been suspended due to violations of our terms of service,If you believe this action was taken in error, please contact our support team for assistance "<a class=" me-2 text-dark " href="contactus.php">Contact Us</a>
-
+        <a class=" me-2 text-dark " href="logout.php">Log Out</a>
         </div>
         
         
         alert;
-    }
-    else if ($isshut==1) {
+    } else if ($isshut == 1) {
         echo <<<alert
                 <div class="alert alert-warning text-center" role="alert">
                 <i class="bi bi-building-fill-lock text-dark"></i> Sorry For Now All Rooms Are Booked
@@ -82,9 +79,9 @@ session_start();
         
         alert;
     }
-        ?>
+    ?>
     <?php require('inc/header.php'); ?>
-    
+
 
 
     <!-- carousel -->
@@ -130,7 +127,7 @@ session_start();
         <div class="row">
             <div class="col-lg-12 bg-white shadow p-4 shadow-lg rounded ">
 
-          
+
                 <h5 class="mb-4">Check Booking Availability</h5>
                 <form>
                     <div class="row align-items-end">
@@ -223,7 +220,7 @@ session_start();
                         <div class="d-flex justify-content-evenly mb-2">
 
                             <?php
-                            if ($isshut==1) {
+                            if ($isshut == 1) {
                                 echo <<<alert
                         
                                 <a href="#" class="btn  text-white  shadow-none btn-danger disabled">Booking Full</a>
@@ -231,8 +228,7 @@ session_start();
                                 
                                 
                                 alert;
-                            }
-                            else if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['ban'] == 1) {
+                            } else if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['ban'] == 1) {
                                 echo <<<data
 
                                 <a href="#" class="btn  text-white  shadow-none btn-danger disabled">Can't Book</a>
@@ -300,7 +296,7 @@ session_start();
                         <div class="d-flex justify-content-evenly mb-2">
 
                             <?php
-                               if ($isshut==1) {
+                            if ($isshut == 1) {
                                 echo <<<alert
                         
                                 <a href="#" class="btn  text-white  shadow-none btn-danger disabled">Booking Full</a>
@@ -308,8 +304,7 @@ session_start();
                                 
                                 
                                 alert;
-                            }
-                            else if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['ban'] == 1) {
+                            } else if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['ban'] == 1) {
                                 echo <<<data
 
                                 <a href="#" class="btn  text-white  shadow-none btn-danger disabled">Can't Book</a>
@@ -376,7 +371,7 @@ session_start();
                         <div class="d-flex justify-content-evenly mb-2">
 
                             <?php
-                               if ($isshut==1) {
+                            if ($isshut == 1) {
                                 echo <<<alert
                         
                                 <a href="#" class="btn  text-white  shadow-none btn-danger disabled">Booking Full</a>
@@ -384,8 +379,7 @@ session_start();
                                 
                                 
                                 alert;
-                            }
-                            else if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['ban'] == 1) {
+                            } else if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['ban'] == 1) {
                                 echo <<<data
 
                                 <a href="#" class="btn  text-white  shadow-none btn-danger disabled">Can't Book</a>

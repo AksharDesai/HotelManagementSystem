@@ -4,6 +4,11 @@ require("connection.php");
 session_start();
 
 
+
+
+
+
+
 // it is the function of uploading an image vv
 function image_upload($img)
 {
@@ -23,7 +28,7 @@ if (isset($_POST["login"])) {
 
 
 
-    $query = "SELECT * FROM  registered_users WHERE  email='$_POST[email_username]' OR phoneno='$_POST[email_username]' ";
+    $query = "SELECT * FROM  registered_users WHERE  email='$_POST[email_username]' OR phoneno='$_POST[phoneno]' ";
     $result = mysqli_query($con, $query);
 
     if ($result) {
@@ -32,15 +37,14 @@ if (isset($_POST["login"])) {
 
             if (password_verify($_POST['password'], $result_fetch['password'])) {
                 $_SESSION['logged_in'] = true;
+                $_SESSION['user_id'] = $result_fetch['user_id']; // Add this line to store user_id in session
                 $_SESSION['email'] = $result_fetch['email'];
                 $_SESSION['name'] = $result_fetch['name'];
                 $_SESSION['level'] = $result_fetch['level'];
                 $_SESSION['ban'] = $result_fetch['ban'];
-              
                 if ($result_fetch['level'] == 1) {
                     header("location:index.php");
                 } else if ($result_fetch['level'] == 0) {
-
                     header("location:index.php");
                 }
             } else {
@@ -120,6 +124,9 @@ if (isset($_POST['register'])) {
             $password = password_hash($_POST["password"], PASSWORD_BCRYPT);
             $query = "INSERT INTO `registered_users` (`name`,`image`, `email`, `phoneno`, `pincode`, `birthdate`, `password`, `address`) VALUES ('$_POST[name]','$imgpath','$_POST[email]','$_POST[phoneno]','$_POST[pincode]','$_POST[birthdate]','$password','$_POST[address]')";
             if (mysqli_query($con, $query)) {
+
+
+
 
                 echo "
             <script>

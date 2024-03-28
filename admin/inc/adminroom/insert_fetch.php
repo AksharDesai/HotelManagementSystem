@@ -2,8 +2,6 @@
 
 if (isset($_POST['addroom'])) {
 
-
-
     $facilities = $_POST['facilities'];
     $features = $_POST['features'];
     $facilities1 = implode(" | ", $facilities);
@@ -11,25 +9,33 @@ if (isset($_POST['addroom'])) {
 
     $imgpath = image_upload($_FILES['image']);
 
+    // Escape user inputs to prevent SQL injection
+    $name = mysqli_real_escape_string($con, $_POST['name']);
+    $area = mysqli_real_escape_string($con, $_POST['area']);
+    $quantity = mysqli_real_escape_string($con, $_POST['quantity']);
+    $price = mysqli_real_escape_string($con, $_POST['price']);
+    $adult = mysqli_real_escape_string($con, $_POST['adult']);
+    $children = mysqli_real_escape_string($con, $_POST['children']);
+    $desc = mysqli_real_escape_string($con, $_POST['desc']);
 
+    // Construct the SQL query
+    $add_query = "INSERT INTO `rooms`(`image`, `name`, `area`, `quantity`, `price`, `adult`, `children`, `features`, `facilities`, `Description`) VALUES ('$imgpath', '$name', '$area', '$quantity', '$price', '$adult', '$children', '$features1', '$facilities1', '$desc')";
 
-    // $add_query = "INSERT INTO `rooms`(`image`,`name`, `price`, `adult`, `children`, `features`, `facilities`, `Description`) VALUES ('$imgpath','$_POST[name]','$_POST[price]','$_POST[adult]','$_POST[children]','$features1','$facilities1','$_POST[desc]')";
-    $add_query = "INSERT INTO `rooms`(`image`, `name`, `area`, `quantity`, `price`, `adult`, `children`, `features`, `facilities`, `Description`) VALUES ('$imgpath','$_POST[name]','$_POST[area]','$_POST[quantity]','$_POST[price]','$_POST[adult]','$_POST[children]','$features1','$facilities1','$_POST[desc]')";
+    // Execute the query
     if (mysqli_query($con, $add_query)) {
-
         echo "
-                <script>
-                alert('Room Added ');
-                window.location.href='rooms.php';
-                </script>
-                ";
+            <script>
+            alert('Room Added ');
+            window.location.href='rooms.php';
+            </script>
+        ";
     } else {
         echo "
-                    <script>
-                    alert('cannot run query');
-                    window.location.href='rooms.php';
-                    </script>
-                    ";
+            <script>
+            alert('Cannot run query');
+            window.location.href='rooms.php';
+            </script>
+        ";
     }
 }
 

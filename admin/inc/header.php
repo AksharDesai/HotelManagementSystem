@@ -27,6 +27,9 @@
                     <li class="nav-item">
                         <a class="nav-link  text-white" href="users.php">  Users </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link  text-white" href="bookings.php">  Bookings </a>
+                    </li>
 
                 </ul>
 
