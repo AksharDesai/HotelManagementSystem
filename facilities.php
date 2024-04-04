@@ -59,7 +59,7 @@ session_start();
                 <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
                     <div class="d-flex align-items-center mb-2">
 
-                        <img src="images\facilities\IMG_27079.svg" alt="" width="40px">
+                        <img src="images\icons\wifi.png" alt="" width="100px">
                         <h5 class="m-0 ms-3">Wifi</h5>
                     </div>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates nesciunt qui rem fugit porro nulla dignissimos!</p>
@@ -70,8 +70,8 @@ session_start();
                 <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
                     <div class="d-flex align-items-center mb-2">
 
-                        <img src="images\facilities\IMG_27079.svg" alt="" width="40px">
-                        <h5 class="m-0 ms-3">Wifi</h5>
+                        <img src="images\icons\ac.png" alt="" width="100px">
+                        <h5 class="m-0 ms-3">AC</h5>
                     </div>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates nesciunt qui rem fugit porro nulla dignissimos!</p>
                 </div>
@@ -81,20 +81,8 @@ session_start();
                 <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
                     <div class="d-flex align-items-center mb-2">
 
-                        <img src="images\facilities\IMG_27079.svg" alt="" width="40px">
-                        <h5 class="m-0 ms-3">Wifi</h5>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates nesciunt qui rem fugit porro nulla dignissimos!</p>
-                </div>
-            </div>
-
-
-            <div class="col-lg-4 col-md-6 mb-5 px-4">
-                <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
-                    <div class="d-flex align-items-center mb-2">
-
-                        <img src="images\facilities\IMG_27079.svg" alt="" width="40px">
-                        <h5 class="m-0 ms-3">Wifi</h5>
+                        <img src="images\icons\heater.png" alt="" width="100px">
+                        <h5 class="m-0 ms-3">Heater</h5>
                     </div>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates nesciunt qui rem fugit porro nulla dignissimos!</p>
                 </div>
@@ -105,8 +93,8 @@ session_start();
                 <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
                     <div class="d-flex align-items-center mb-2">
 
-                        <img src="images\facilities\IMG_27079.svg" alt="" width="40px">
-                        <h5 class="m-0 ms-3">Wifi</h5>
+                        <img src="images\icons\spa.png" alt="" width="100px">
+                        <h5 class="m-0 ms-3">Spa</h5>
                     </div>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates nesciunt qui rem fugit porro nulla dignissimos!</p>
                 </div>
@@ -117,8 +105,20 @@ session_start();
                 <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
                     <div class="d-flex align-items-center mb-2">
 
-                        <img src="images\facilities\IMG_27079.svg" alt="" width="40px">
-                        <h5 class="m-0 ms-3">Wifi</h5>
+                        <img src="images\icons\tv.png" alt="" width="100px">
+                        <h5 class="m-0 ms-3">TeleVision</h5>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates nesciunt qui rem fugit porro nulla dignissimos!</p>
+                </div>
+            </div>
+
+
+            <div class="col-lg-4 col-md-6 mb-5 px-4">
+                <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
+                    <div class="d-flex align-items-center mb-2">
+
+                        <img src="images\icons\food.png" alt="" width="100px">
+                        <h5 class="m-0 ms-3">Food</h5>
                     </div>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates nesciunt qui rem fugit porro nulla dignissimos!</p>
                 </div>

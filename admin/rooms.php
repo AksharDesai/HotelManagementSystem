@@ -192,12 +192,12 @@ if (isset($_GET['rem']) && $_GET['rem'] > 0) {
             $imgpath = image_upload($_FILES['image']);
 
             $update = "UPDATE `rooms` SET `image`='$imgpath', `name`='$_POST[name]', `area`='$_POST[area]', `quantity`='$_POST[quantity]', `price`='$_POST[price]', `adult`='$_POST[adult]', `children`='$_POST[children]', `Description`='$_POST[desc]' WHERE `room_id`='$_POST[editrid]'";
-            
-               
+           
             
         } else {
 
             $update = "UPDATE `rooms` SET  `name`='$_POST[name]', `area`='$_POST[area]', `quantity`='$_POST[quantity]', `price`='$_POST[price]', `adult`='$_POST[adult]', `children`='$_POST[children]', `Description`='$_POST[desc]' WHERE `room_id`='$_POST[editrid]'";
+            
         }
         if (mysqli_query($con, $update)) {
             echo "

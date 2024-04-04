@@ -24,6 +24,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="about.php">About</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="feedbackform.php">FeedBack</a>
+                    </li>
 
 
                 </ul>
@@ -74,7 +77,7 @@
                         $_SESSION[name]
                     </button>
                     <ul class="dropdown-menu dropdown-menu-lg-end">
-                        <li><a class="dropdown-item" href="profile.php">Profile</b></li>
+                        <li><a class="dropdown-item" href="profile.php">Profile</a></li>
                         <li><a class="dropdown-item" href="successfull.php">Booking</a></li>
                         <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                     </ul>
@@ -125,9 +128,9 @@
                         </div>
                         <div class="d-flex align-items-center justify-content-between">
                             <button type="submit" class="btn btn-dark" name="login">LOGIN</button>
-                            <button type="button" class="btn btn-outline-danger text-dark border-0" data-bs-toggle="modal" data-bs-target="#forgetmodal">
+                            <a href="forgotpage.php" class="btn btn-outline-danger text-dark border-0" >
                                 Forget Password ?
-                            </button>
+                            </a>
                         </div>
 
                     </div>

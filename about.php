@@ -101,41 +101,7 @@ session_start();
         </div>
     </div>
 
-    <h3 class="my-5 fw-bold h-font text-center">MANAGEMENT TEAM</h3>
-
-    <div class="container px-4">
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper mb-5 ">
-                <div class="swiper-slide bg-white text-center overflow-hidden rounded"><img src="images\about\IMG_17352.jpg" class="w-100 img-fluid" alt="">
-                    <h5 mt-4> Random Name</h5>
-                </div>
-
-                <div class="swiper-slide bg-white text-center overflow-hidden rounded"><img src="images\about\IMG_17352.jpg" class="w-100 img-fluid" alt="">
-                    <h5 mt-4> Random Name</h5>
-                </div>
-
-                <div class="swiper-slide bg-white text-center overflow-hidden rounded"><img src="images\about\IMG_17352.jpg" class="w-100 img-fluid" alt="">
-                    <h5 mt-4> Random Name</h5>
-                </div>
-
-                <div class="swiper-slide bg-white text-center overflow-hidden rounded"><img src="images\about\IMG_17352.jpg" class="w-100 img-fluid" alt="">
-                    <h5 mt-4> Random Name</h5>
-                </div>
-
-                <div class="swiper-slide bg-white text-center overflow-hidden rounded"><img src="images\about\IMG_17352.jpg" class="w-100 img-fluid" alt="">
-                    <h5 mt-4> Random Name</h5>
-                </div>
-
-                <div class="swiper-slide bg-white text-center overflow-hidden rounded"><img src="images\about\IMG_17352.jpg" class="w-100 img-fluid" alt="">
-                    <h5 mt-4> Random Name</h5>
-                </div>
-
-            </div>
-
-
-            <div class="swiper-pagination"></div>
-        </div>
-    </div>
+   
 
 
 
@@ -146,33 +112,7 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <!-- Initialize Swiper -->
-    <script>
-        var swiper = new Swiper(".mySwiper", {
-
-            spaceBetween: 40,
-            pagination: {
-                el: ".swiper-pagination",
-                dynamicBullets: true,
-            },
-            breakpoints: {
-                320: {
-                    slidesPerView: 1,
-                },
-                640: {
-                    slidesPerView: 1,
-
-                },
-                768: {
-                    slidesPerView: 3,
-
-                },
-                1024: {
-                    slidesPerView: 3,
-
-                },
-            }
-        });
-    </script>
+   
 
 
 </body>

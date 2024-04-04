@@ -65,92 +65,9 @@ function image_upload($img)
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-12 mb-4 mb-lg-0 px-lg-0">
-                <nav class="navbar navbar-expand-lg navbar-light bg-white rounded shadow">
-                    <div class="container-fluid flex-lg-column align-items-stretch ">
-                        <h4 class="mt-2">Filters</h4>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#filterdropdown" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse flex-column align-items-stretch mt-2" id="filterdropdown">
+           
 
-                            <div class="border bg-light p-3 rounded mb-3 ">
-
-                                <h5 class="mb-3" style="font-size:18px;">Check Availability</h5>
-
-                                <label class="form-label ">Check-in</label>
-
-                                <input type="date" class="form-control mb-3 ">
-
-                                <label class="form-label">Check-out</label>
-
-                                <input type="date" class="form-control ">
-
-
-                            </div>
-                            <div class="border bg-light p-3 rounded mb-3 ">
-
-                                <h5 class="mb-3" style="font-size:18px;">Facilities</h5>
-
-                                <div class="mb-0.5">
-                                    <input type="checkbox" id="f1" class="form-check-input  shadow-none mb-3 me-1 ">
-                                    <label class="form-label ">Facility one</label>
-
-
-                                </div>
-                                <div class="mb-0.5">
-                                    <input type="checkbox" id="f2" class="form-check-input  shadow-none mb-3 me-1 ">
-                                    <label class="form-label ">Facility Two</label>
-
-
-                                </div>
-                                <div class="mb-0.5">
-                                    <input type="checkbox" id="f3" class="form-check-input  shadow-none mb-3 me-1 ">
-                                    <label class="form-label ">Facility Three</label>
-
-
-                                </div>
-
-
-
-
-
-                            </div>
-                            <div class="border bg-light p-3 rounded mb-3 ">
-
-                                <h5 class="mb-3" style="font-size:18px;">Guests</h5>
-
-                                <div class="d-flex">
-
-                                    <div class="me-3">
-                                        <label class="form-label">Adults</label>
-                                        <input type="number" class="form-control ">
-
-                                    </div>
-                                    <div>
-                                        <label class="form-label">Children</label>
-                                        <input type="number" class="form-control ">
-
-                                    </div>
-                                </div>
-
-
-
-
-                            </div>
-
-
-
-
-
-
-                        </div>
-
-                    </div>
-                </nav>
-            </div>
-
-            <div class="col-lg-9 col-md-12 px-4">
+            <div class="col-lg-12 col-md-12 px-4">
 
 
 
@@ -180,7 +97,7 @@ function image_upload($img)
                                                         <h5 class="mb-3">$fetch[name]</h5>
                                                         <div class="features mb-3 ">
                                                             <h6 class="mb-1">Features</h6>
-                                                            <span class="badge rounded-pill bg-light text-dark text-wrap lh-base">$fetch[features]</span>
+                                                            <span class="badge rounded-pill bg-light text-dark text-wrap lh-base">$fetch[features]hgvjhgjy</span>
                                                             
                                                             
                                                             
@@ -205,7 +122,7 @@ function image_upload($img)
                                                         <br>
                                                        
                                                         <a href="bookings.php?room_id=$fetch[room_id];&price=$fetch[price];" class="btn text-white custom-bg shadow-none mb-2">Book Now</a>
-                                                        <a href="#" class="btn  btn-outline-dark  shadow-none">More Details</a>
+                                                        <a href="feedbackform.php" class="btn  btn-outline-dark  shadow-none">FeedBack</a>
                                                             
                                                             
                                                         

@@ -21,11 +21,16 @@ html{
     font-family: 'Merienda', cursive;
 }
 
+.custom-font{
+    font-family: "monument";
+}
+
 
 
 .custom-bg {
     background-color: var(--teal);
     border: 1px solid  var(--teal);
+    
 
 }
 

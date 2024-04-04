@@ -10,11 +10,10 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
-
-// Fetch user information from the database
 $user_id = $_SESSION['user_id'];
 $query = "SELECT * FROM `registered_users` WHERE `user_id` = $user_id";
 $result = mysqli_query($con, $query);
+$fetch_src = FETCH_SRC;
 
 if ($result && mysqli_num_rows($result) > 0) {
     // Fetch the user's data
@@ -23,6 +22,53 @@ if ($result && mysqli_num_rows($result) > 0) {
     // Handle error if user data not found
     $user_data = array();
 }
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Initialize an array to store the fields that need to be updated
+    $update_fields = array();
+
+    // Check each input field to see if it has changed or not
+    if (!empty($_POST['name']) && $_POST['name'] !== $user_data['name']) {
+        $update_fields['name'] = $_POST['name'];
+    }
+    if (!empty($_POST['phoneno']) && $_POST['phoneno'] !== $user_data['phoneno']) {
+        $update_fields['phoneno'] = $_POST['phoneno'];
+    }
+    if (!empty($_POST['birthdate']) && $_POST['birthdate'] !== $user_data['birthdate']) {
+        $update_fields['birthdate'] = $_POST['birthdate'];
+    }
+    if (!empty($_POST['pincode']) && $_POST['pincode'] !== $user_data['pincode']) {
+        $update_fields['pincode'] = $_POST['pincode'];
+    }
+    if (!empty($_POST['address']) && $_POST['address'] !== $user_data['address']) {
+        $update_fields['address'] = $_POST['address'];
+    }
+
+    // Check if there are fields to update
+    if (!empty($update_fields)) {
+        // Generate the SQL update query
+        $update_query = "UPDATE `registered_users` SET ";
+        foreach ($update_fields as $key => $value) {
+            $update_query .= "`$key` = '$value', ";
+        }
+        // Remove the trailing comma and space from the query
+        $update_query = rtrim($update_query, ", ");
+        // Add the WHERE condition
+        $update_query .= " WHERE `user_id` = $user_id";
+
+        // Execute the update query
+        if (mysqli_query($con, $update_query)) {
+            // Redirect to the profile page after successful update
+            header("Location: profile.php");
+            exit();
+        } else {
+            // Handle error if update fails
+            echo "Error updating record: " . mysqli_error($con);
+        }
+    }
+}
+
+
 
 ?>
 
@@ -63,29 +109,29 @@ if ($result && mysqli_num_rows($result) > 0) {
 
 
                 <h5 class="mb-4">Basic information</h5>
-                <form>
+                <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                     <div class="row align-items-end">
 
                         <div class="col-lg-3 mb-3">
                             <label class="form-label" style="font-weight: 500;">Name</label>
-                            <input type="text" class="form-control " value="<?php echo $user_data['name'] ?? ''; ?>" required>
+                            <input type="text" class="form-control " name="name" value="<?php echo $user_data['name'] ?? ''; ?>" required>
                         </div>
 
                         <div class="col-lg-3 mb-3">
                             <label class="form-label" style="font-weight: 500;">Phone Number</label>
-                            <input type="number" class="form-control" aria-describedby="emailHelp" name="phoneno" value="<?php echo $user_data['phoneno'] ?? ''; ?>" required>
+                            <input type="number" class="form-control" name="phoneno" aria-describedby="emailHelp" name="phoneno" value="<?php echo $user_data['phoneno'] ?? ''; ?>" required>
                         </div>
                         <div class="col-lg-5 mb-3">
                             <label class="form-label" style="font-weight: 500;">Date of Birth</label>
-                            <input type="date" class="form-control" aria-describedby="emailHelp" name="phoneno" value="<?php echo $user_data['birthdate'] ?? ''; ?>" required>
+                            <input type="date" class="form-control" aria-describedby="emailHelp" name="birthdate" value="<?php echo $user_data['birthdate'] ?? ''; ?>" required>
                         </div>
                         <div class="col-md-3 mb-3">
                             <label class="form-label" style="font-weight: 500;">Pincode</label>
-                            <input type="number" class="form-control" aria-describedby="emailHelp" name="phoneno" value="<?php echo $user_data['pincode'] ?? ''; ?>" required>
+                            <input type="number" class="form-control" aria-describedby="emailHelp" name="pincode" value="<?php echo $user_data['pincode'] ?? ''; ?>" required>
                         </div>
                         <div class="col-md-5 mb-3">
                             <label class="form-label" style="font-weight: 500;">Address</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" name="phoneno" value="<?php echo $user_data['address'] ?? ''; ?>" required>
+                            <input type="text" class="form-control" aria-describedby="emailHelp" name="address" value="<?php echo $user_data['address'] ?? ''; ?>" required>
                         </div>
 
 
@@ -97,7 +143,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                     </div>
 
                     <div class="col-lg-2 mb-lg-4 mb-2">
-                        <button type="submit" class="btn text-white shadow-none custom-bg">Save Changes</button>
+                        <button type="submit" name="" class="btn text-white shadow-none custom-bg">Save Changes</button>
                     </div>
                 </form>
             </div>
@@ -116,8 +162,9 @@ if ($result && mysqli_num_rows($result) > 0) {
                     <form action="">
                         <h5 class="mb-3 fw-bold">Picture</h5>
 
-                        <img src="images\IMG_15372.png" alt="" class="img-fluid mb-3">
-
+                        <div class="d-flex justify-content-center align-items-center mb-5" style="height: 150px;">
+                            <img src="<?php echo $fetch_src . $user_data['image']; ?>" alt="User Image" class="img-fluid rounded-circle" style="width: 200px; height: 200px; object-fit: cover;">
+                        </div>
                         <label class="input-group-text">New Image</label>
 
                         <input type="file" class="form-control mb-4" name="image" accept=".jpg,.png,.jpeg,.svg">
