@@ -30,6 +30,14 @@ html{
 .custom-bg {
     background-color: var(--teal);
     border: 1px solid  var(--teal);
+   
+    
+
+}
+.custom-color {
+    color: lightgreen;
+    
+   
     
 
 }

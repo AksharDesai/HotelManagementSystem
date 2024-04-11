@@ -30,10 +30,11 @@ session_start();
             transform: scale(1.1);
             transition: all 0.3s;
         }
+
         .pop:hover .feedback-name {
-           width: 70%;
-           background-color: gold !important;
-           color: black !important;
+            width: 70%;
+            background-color: gold !important;
+            color: black !important;
         }
 
         .feedback-card {
@@ -47,7 +48,8 @@ session_start();
             width: 130px;
             height: 130px;
         }
-        .feedback-name{
+
+        .feedback-name {
             width: 70%;
             text-align: center;
         }

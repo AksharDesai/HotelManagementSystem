@@ -34,7 +34,7 @@ if (isset($_SESSION['name'])) {
     // Close database connection (assuming it's no longer needed)
     // mysqli_close($con);
 } else {
-    echo "User not logged in.";
+    // echo "User not logged in.";
 }
 ?>
 
@@ -106,77 +106,99 @@ if (isset($_SESSION['name'])) {
             <div class="col-lg-6 col-md-6  px-4">
                 <div class="bg-white rounded shadow p-4 ">
 
-                    <form method="post">
+                <?php
+
+                if (isset($_SESSION['name'])) {
 
 
-                        <div class="mt-3">
-                            <label class="form-label fw-bold">Name</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" name="name" value="<?php echo $user['name']; ?>" disabled required>
-                        </div>
+                  echo <<<HTML
+
+                                <form method="post">
 
 
-                        <div class="mt-3">
-                            <label class="form-label fw-bold">Email address</label>
-                            <input type="email" class="form-control" aria-describedby="emailHelp" name="email" value="<?php echo $user['email']; ?>" disabled required>
-                        </div>
-
-                        <label class="form-label fw-bold mt-3">Rating</label>
-
-                        <br>
-
-                        <div class="form-chec  form-check-inline ">
-                            <input class="form-check-input" type="radio" name="rating" id="exampleRadios1" value="1" checked>
-                            <label class="form-check-label" for="exampleRadios1">
-                                <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i>
-                            </label>
-                        </div>
-
-                        <div class="form-check form-check-inline ">
-                            <input class="form-check-input" type="radio" name="rating" id="exampleRadios1" value="2">
-                            <label class="form-check-label" for="exampleRadios1">
-                                <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i>
-                            </label>
-                        </div>
-
-                        <div class="form-check form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="rating" id="exampleRadios1" value="3">
-                            <label class="form-check-label" for="exampleRadios1">
-                                <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i>
-                            </label>
-                        </div>
-
-                        <div class="form-check form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="rating" id="exampleRadios1" value="4">
-                            <label class="form-check-label" for="exampleRadios1">
-                                <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i>
-                            </label>
-                        </div>
-
-                        <div class="form-check form-check form-check-inline ">
-                            <input class="form-check-input" type="radio" name="rating" id="exampleRadios1" value="5">
-                            <label class="form-check-label" for="exampleRadios1">
-                                <i class="bi bi-star-fill text-warning"></i>
-                            </label>
-                        </div>
+                                    <div class="mt-3">
+                                        <label class="form-label fw-bold">Name</label>
+                                        <input type="text" class="form-control" aria-describedby="emailHelp" name="name" value=" $user[name]" disabled required>
+                                    </div>
 
 
+                                    <div class="mt-3">
+                                        <label class="form-label fw-bold">Email address</label>
+                                        <input type="email" class="form-control" aria-describedby="emailHelp" name="email" value=" $user[email]" disabled required>
+                                    </div>
+
+                                    <label class="form-label fw-bold mt-3">Rating</label>
+
+                                    <br>
+
+                                    <div class="form-chec  form-check-inline ">
+                                        <input class="form-check-input" type="radio" name="rating" id="exampleRadios1" value="1" checked>
+                                        <label class="form-check-label" for="exampleRadios1">
+                                            <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i>
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline ">
+                                        <input class="form-check-input" type="radio" name="rating" id="exampleRadios1" value="2">
+                                        <label class="form-check-label" for="exampleRadios1">
+                                            <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i>
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="rating" id="exampleRadios1" value="3">
+                                        <label class="form-check-label" for="exampleRadios1">
+                                            <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i>
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="rating" id="exampleRadios1" value="4">
+                                        <label class="form-check-label" for="exampleRadios1">
+                                            <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i>
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check form-check form-check-inline ">
+                                        <input class="form-check-input" type="radio" name="rating" id="exampleRadios1" value="5">
+                                        <label class="form-check-label" for="exampleRadios1">
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                        </label>
+                                    </div>
 
 
-                        <div class="mt-3">
-                            <label class="form-label fw-bold">Subject</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" name="subject" required>
-                        </div>
 
-                        <div class="mt-3">
-                            <label class="form-label  fw-bold">Message</label>
-                            <textarea class="form-control" rows="2" name="message" required></textarea>
-                        </div>
 
-                        <div class="mt-2">
-                            <button type="submit" class="btn btn-dark custom-bg" name="send">Send</button>
-                        </div>
-                    </form>
+                                    <div class="mt-3">
+                                        <label class="form-label fw-bold">Subject</label>
+                                        <input type="text" class="form-control" aria-describedby="emailHelp" name="subject" required>
+                                    </div>
 
+                                    <div class="mt-3">
+                                        <label class="form-label  fw-bold">Message</label>
+                                        <textarea class="form-control" rows="2" name="message" required></textarea>
+                                    </div>
+
+                                    <div class="mt-2">
+                                        <button type="submit" class="btn btn-dark custom-bg" name="send">Send</button>
+                                    </div>
+                                </form>
+
+                    HTML;
+
+
+}
+
+                else{
+                    echo <<<HTML
+
+                        <h6> Please log in first  ☹️</h6>
+                        
+
+                    HTML;
+                }
+
+?>
                 </div>
             </div>
 

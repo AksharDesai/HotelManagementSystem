@@ -17,9 +17,10 @@ if (isset($_POST['addroom'])) {
     $adult = mysqli_real_escape_string($con, $_POST['adult']);
     $children = mysqli_real_escape_string($con, $_POST['children']);
     $desc = mysqli_real_escape_string($con, $_POST['desc']);
+    $status = mysqli_real_escape_string($con, $_POST['room_status']);
 
     // Construct the SQL query
-    $add_query = "INSERT INTO `rooms`(`image`, `name`, `area`, `quantity`, `price`, `adult`, `children`, `features`, `facilities`, `Description`) VALUES ('$imgpath', '$name', '$area', '$quantity', '$price', '$adult', '$children', '$features1', '$facilities1', '$desc')";
+    $add_query = "INSERT INTO `rooms`(`image`, `name`, `area`, `quantity`, `price`, `adult`, `children`, `features`, `facilities`, `Description`,`status`) VALUES ('$imgpath', '$name', '$area', '$quantity', '$price', '$adult', '$children', '$features1', '$facilities1', '$desc','$status')";
 
     // Execute the query
     if (mysqli_query($con, $add_query)) {
@@ -68,6 +69,7 @@ if (isset($_POST['addroom'])) {
         <th scope="col">Facilities</th>
         <th scope="col">Description</th>
         <th scope="col">Action</th>
+        <th scope="col">Status</th>
     </tr>
     </thead>
     <tbody class="bg-white">
@@ -78,7 +80,13 @@ if (isset($_POST['addroom'])) {
         $fetch_srcrad = FETCH_SRCrad;
         while ($fetch = mysqli_fetch_assoc($result)) {
 
-
+            if ($fetch['status'] == 1) {
+                $print_status = '<span style="color: green; font-weight: 600;">Available</span>';
+            } elseif ($fetch['status'] == 2) {
+                $print_status = '<span style="color: red;font-weight: 600;">All Booked</span>';
+            } elseif ($fetch['status'] == 3) {
+                $print_status = '<span style="color:rgb(147, 125, 2);font-weight: 600;">Under Maintenance</span>';
+            }
 
 
             echo <<<product
@@ -95,7 +103,8 @@ if (isset($_POST['addroom'])) {
 <td>$fetch[facilities]</td>
 
 <td>$fetch[Description]</td> 
-<td><button onclick="confirm_rem($fetch[room_id])" class="btn btn-danger text-light "><i class="bi bi-trash3-fill  text-light"></i></button>  <a href="?edit=$fetch[room_id]" class="btn btn-success mt-1 "><i class="bi bi-bookmark-plus-fill text-dark fw-5  "></i></a></td>
+<td><button onclick="confirm_rem($fetch[room_id])" class="btn btn-danger text-light "><i class="bi bi-trash3-fill  text-light"></i></button>  <a href="?edit=$fetch[room_id]" class="btn custom-bg mt-1 "><i class="bi bi-bookmark-plus-fill text-dark fw-5  "></i></a></td>
+<td class="text-center">$print_status</td> 
 
 
 

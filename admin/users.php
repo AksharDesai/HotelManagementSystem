@@ -143,7 +143,7 @@ function image_upload($img)
                         <td>$fetch[pincode]</td>
                         <td>$fetch[birthdate]</td>
                         <td>$fetch[address]</td> 
-                        <td>$buttonHTML <a href="?edit=$fetch[user_id]" class="btn btn-success mt-1 "><i class="bi bi-bookmark-plus-fill text-dark fw-5  "></i></a></td>
+                        <td>$buttonHTML <a href="?edit=$fetch[user_id]" class="btn custom-bg mt-1 "><i class="bi bi-bookmark-plus-fill text-dark fw-5  "></i></a></td>
                         
                      
                         

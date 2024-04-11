@@ -60,7 +60,7 @@ session_start();
 
     <?php
 
-    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['ban'] == 1) {
+    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && isset($_SESSION['ban']) && $_SESSION['ban'] == 1) {
         echo <<<alert
 
         <div class="alert ban alert-danger alert-dismissible fade show position-fixed" role="alert""><i class="bi bi-exclamation-triangle-fill"></i>
@@ -123,51 +123,13 @@ session_start();
     <!-- carousel end here -->
 
     <!-- check availability form -->
-    <div class="container availability-form ">
+    <div class="container availability-form">
         <div class="row">
-            <div class="col-lg-12 bg-white shadow p-4 shadow-lg rounded ">
+            <div class="col-lg-12 bg-dark shadow p-4 shadow-lg rounded d-flex align-items-center justify-content-center">
 
 
-                <h5 class="mb-4">Check Booking Availability</h5>
-                <form>
-                    <div class="row align-items-end">
-                        <div class="col-lg-3 mb-3">
-                            <label class="form-label" style="font-weight: 500;">Check-in</label>
-                            <input type="date" class="form-control ">
-                        </div>
-
-                        <div class="col-lg-3 mb-3">
-                            <label class="form-label" style="font-weight: 500;">Check-out</label>
-                            <input type="date" class="form-control ">
-                        </div>
-
-                        <div class="col-lg-3 mb-3">
-                            <label class="form-label" style="font-weight: 500;">Adult</label>
-                            <select class="form-select">
-                                <option selected>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-
-                        <div class="col-lg-2 mb-3">
-                            <label class="form-label" style="font-weight: 500;">Children</label>
-                            <select class="form-select">
-                                <option selected>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-
-                        <div class="col-lg-1 mb-lg-3 mb-2">
-                            <button type="submit" class="btn text-white shadow-none custom-bg">Submit</button>
-                        </div>
-
-
-                    </div>
-                </form>
+                <h5 class="mb-4 mt-4 text-center text-white ">"Embark on a journey of comfort and luxury. Your stay is not just a reservation; it's a passport to unparalleled experiences."</h5>
+               
             </div>
         </div>
     </div>
@@ -251,7 +213,6 @@ session_start();
 
         <!-- rooms part ends here -->
 
-
         <!-- facilities part -->
 
         <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Our Facilities</h2>
@@ -287,17 +248,36 @@ session_start();
 
         <!-- testimonal starts from here -->
 
+        
+
         <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font ">Testimonials</h2>
 
         <div class="container shadow-lg mt-5">
             <div class="swiper swiper-testimonials">
                 <div class="swiper-wrapper">
+
+
+                <?php 
+               
+               $feedback_query="SELECT feedback.feedback_id, feedback.rating, feedback.subject, feedback.message, registered_users.name, registered_users.image 
+               FROM feedback
+               INNER JOIN registered_users ON feedback.user_id = registered_users.user_id";
+               $feedback_result=mysqli_query($con,$feedback_query);
+
+               $fetch_src = FETCH_SRC;
+
+               while ($fetch_feedback = mysqli_fetch_assoc($feedback_result)){
+
+               
+
+
+               echo <<<feedbackecho
                     <div class="swiper-slide bg-white p-4 ">
                         <div class="profile d-flex align-items-center mb-3">
-                            <img src="images\star-fill.svg" width="30px">
-                            <h6 class="m-0 ms-2">Random User1</h6>
+                            <img src="$fetch_src$fetch_feedback[image]" width="40px" class="rounded-circle">
+                            <h6 class="m-0 ms-2">$fetch_feedback[name]</h6>
                         </div>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam illum sunt minima placeat pariatur quae eaque aliquam quaerat deserunt. Vitae.</p>
+                        <p>$fetch_feedback[message]</p>
                         <div class="rating">
 
                             <i class="bi bi-star-fill text-warning"></i>
@@ -309,41 +289,17 @@ session_start();
 
                     </div>
 
+                    feedbackecho;
 
-                    <div class="swiper-slide bg-white p-4 ">
-                        <div class="profile d-flex align-items-center mb-3">
-                            <img src="images\star-fill.svg" width="30px">
-                            <h6 class="m-0 ms-2">Random User1</h6>
-                        </div>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam illum sunt minima placeat pariatur quae eaque aliquam quaerat deserunt. Vitae.</p>
-                        <div class="rating">
+               }
 
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-
-                        </div>
-
-                    </div>
+                    ?>
 
 
-                    <div class="swiper-slide bg-white p-4 ">
-                        <div class="profile d-flex align-items-center mb-3">
-                            <img src="images\star-fill.svg" width="30px">
-                            <h6 class="m-0 ms-2">Random User1</h6>
-                        </div>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam illum sunt minima placeat pariatur quae eaque aliquam quaerat deserunt. Vitae.</p>
-                        <div class="rating">
+            
 
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
 
-                        </div>
-
-                    </div>
+               
 
                 </div>
                 <div class="swiper-pagination"></div>
@@ -394,50 +350,52 @@ session_start();
             </div>
         </div>
 
-        <!--  reach us ends here -->
+    </div>
+
+    <!--  reach us ends here -->
 
 
 
-        <?php require('inc/footer.php'); ?>
+    <?php require('inc/footer.php'); ?>
 
 
-        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-        <!-- Initialize Swiper -->
-        <script>
-            var swiper = new Swiper(".swiper-testimonials", {
-                effect: "coverflow",
-                grabCursor: true,
-                centeredSlides: true,
-                loop: true,
-                slidesPerView: "auto",
-                slidesPerView: "3",
-                coverflowEffect: {
-                    rotate: 50,
-                    stretch: 0,
-                    depth: 100,
-                    modifier: 1,
-                    slideShadows: false,
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper(".swiper-testimonials", {
+            effect: "coverflow",
+            grabCursor: true,
+            centeredSlides: true,
+            loop: true,
+            slidesPerView: "auto",
+            slidesPerView: "3",
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
                 },
-                pagination: {
-                    el: ".swiper-pagination",
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 40,
                 },
-                breakpoints: {
-                    640: {
-                        slidesPerView: 1,
-                        spaceBetween: 20,
-                    },
-                    768: {
-                        slidesPerView: 2,
-                        spaceBetween: 40,
-                    },
-                    1024: {
-                        slidesPerView: 3,
-                        spaceBetween: 50,
-                    },
-                }
-            });
-        </script>
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 50,
+                },
+            }
+        });
+    </script>
 </body>
 
 </html>
