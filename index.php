@@ -85,10 +85,10 @@ session_start();
 
 
     <!-- carousel -->
-    <div class="container-fluid mt-4 px-lg-4">
+    <div class="container-fluid mt-4 px-lg-4 " >
 
         <div id="carouselExampleFade" class="carousel slide " data-bs-ride="carousel">
-            <div class="carousel-inner">
+            <div class="carousel-inner border border-5 border-dark">
                 <div class="carousel-item active">
                     <img src="images\IMG_15372.png" class="d-block w-100" alt="...">
                 </div>
@@ -129,7 +129,7 @@ session_start();
 
 
                 <h5 class="mb-4 mt-4 text-center text-white ">"Embark on a journey of comfort and luxury. Your stay is not just a reservation; it's a passport to unparalleled experiences."</h5>
-               
+
             </div>
         </div>
     </div>
@@ -248,7 +248,7 @@ session_start();
 
         <!-- testimonal starts from here -->
 
-        
+
 
         <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font ">Testimonials</h2>
 
@@ -257,21 +257,21 @@ session_start();
                 <div class="swiper-wrapper">
 
 
-                <?php 
-               
-               $feedback_query="SELECT feedback.feedback_id, feedback.rating, feedback.subject, feedback.message, registered_users.name, registered_users.image 
+                    <?php
+
+                    $feedback_query = "SELECT feedback.feedback_id, feedback.rating, feedback.subject, feedback.message, registered_users.name, registered_users.image 
                FROM feedback
                INNER JOIN registered_users ON feedback.user_id = registered_users.user_id";
-               $feedback_result=mysqli_query($con,$feedback_query);
+                    $feedback_result = mysqli_query($con, $feedback_query);
 
-               $fetch_src = FETCH_SRC;
+                    $fetch_src = FETCH_SRC;
 
-               while ($fetch_feedback = mysqli_fetch_assoc($feedback_result)){
-
-               
+                    while ($fetch_feedback = mysqli_fetch_assoc($feedback_result)) {
 
 
-               echo <<<feedbackecho
+
+
+                        echo <<<feedbackecho
                     <div class="swiper-slide bg-white p-4 ">
                         <div class="profile d-flex align-items-center mb-3">
                             <img src="$fetch_src$fetch_feedback[image]" width="40px" class="rounded-circle">
@@ -290,16 +290,15 @@ session_start();
                     </div>
 
                     feedbackecho;
-
-               }
+                    }
 
                     ?>
 
 
-            
 
 
-               
+
+
 
                 </div>
                 <div class="swiper-pagination"></div>

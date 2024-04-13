@@ -93,61 +93,67 @@ if (empty($_GET['room_id'])) {
         .h-font {
             font-family: 'Merienda', cursive !important;
         }
-       
-   
-         
+    
+        video {
+            width: 100%;
+            height: 90% ;
+            object-fit: cover;
+            
+        }
+
     </style>
 
     <script>
-         function calculateTotalPrice() {
-        var pricePerNight = <?php echo isset($_SESSION['price']) ? $_SESSION['price'] : 0; ?>;
-        var checkIn = document.getElementById("check_in").value;
-        var checkOut = document.getElementById("check_out").value;
+        function calculateTotalPrice() {
+            var pricePerNight = <?php echo isset($_SESSION['price']) ? $_SESSION['price'] : 0; ?>;
+            var checkIn = document.getElementById("check_in").value;
+            var checkOut = document.getElementById("check_out").value;
 
-        if (checkIn && checkOut) {
-            var daysDifference = Math.ceil((new Date(checkOut) - new Date(checkIn)) / (1000 * 60 * 60 * 24));
-            var totalPrice = pricePerNight * daysDifference;
-            document.getElementById("total_price").innerText = "Total Price: $" + totalPrice;
-            document.getElementById("total_days").innerText = "Total Days: " + daysDifference;
-        } else {
-            document.getElementById("total_price").innerText = "";
-            document.getElementById("total_days").innerText = "";
+            if (checkIn && checkOut) {
+                var daysDifference = Math.ceil((new Date(checkOut) - new Date(checkIn)) / (1000 * 60 * 60 * 24));
+                var totalPrice = pricePerNight * daysDifference;
+                document.getElementById("total_price").innerText = "Total Price: $" + totalPrice;
+                document.getElementById("total_days").innerText = "Total Days: " + daysDifference;
+            } else {
+                document.getElementById("total_price").innerText = "";
+                document.getElementById("total_days").innerText = "";
+            }
+
+            validatePrice(); // Call validatePrice function after calculating total price
         }
-        
-        validatePrice(); // Call validatePrice function after calculating total price
-    }
-    function validatePaymentAmount() {
-    var paymentAmount = parseFloat(document.getElementById("payment_amount").value);
-    var totalPrice = parseFloat(document.getElementById("total_price").innerText.split("$")[1]);
-    var confirmButton = document.getElementById("confirm_booking");
 
-    if (isNaN(paymentAmount)) {
-        document.getElementById("payment_error").innerText = "Please enter a valid payment amount.";
-        confirmButton.disabled = true;
-    } else if (paymentAmount < totalPrice) {
-        document.getElementById("payment_error").innerText = "Payment amount must be equal to the displayed price above.";
-        confirmButton.disabled = true;
-    } else if (paymentAmount > totalPrice) {
-        document.getElementById("payment_error").innerText = "Payment amount must be equal to the displayed price above..";
-        confirmButton.disabled = true;
-    }else {
-        document.getElementById("payment_error").innerText = "";
-        confirmButton.disabled = false;
-    }
-}
+        function validatePaymentAmount() {
+            var paymentAmount = parseFloat(document.getElementById("payment_amount").value);
+            var totalPrice = parseFloat(document.getElementById("total_price").innerText.split("$")[1]);
+            var confirmButton = document.getElementById("confirm_booking");
 
-    function validatePrice() {
-        var enteredPrice = parseFloat(document.getElementById("payment_amount").value);
-        var totalPrice = parseFloat(document.getElementById("total_price").innerText.split("$")[1]);
-
-        if (enteredPrice !== totalPrice) {
-            document.getElementById("price_error").innerText = "Entered price does not match the total price.";
-            document.getElementById("confirm_booking").disabled = true; // Disable the confirm button
-        } else {
-            document.getElementById("price_error").innerText = "";
-            document.getElementById("confirm_booking").disabled = false; // Enable the confirm button
+            if (isNaN(paymentAmount)) {
+                document.getElementById("payment_error").innerText = "Please enter a valid payment amount.";
+                confirmButton.disabled = true;
+            } else if (paymentAmount < totalPrice) {
+                document.getElementById("payment_error").innerText = "Payment amount must be equal to the displayed price above.";
+                confirmButton.disabled = true;
+            } else if (paymentAmount > totalPrice) {
+                document.getElementById("payment_error").innerText = "Payment amount must be equal to the displayed price above..";
+                confirmButton.disabled = true;
+            } else {
+                document.getElementById("payment_error").innerText = "";
+                confirmButton.disabled = false;
+            }
         }
-    }
+
+        function validatePrice() {
+            var enteredPrice = parseFloat(document.getElementById("payment_amount").value);
+            var totalPrice = parseFloat(document.getElementById("total_price").innerText.split("$")[1]);
+
+            if (enteredPrice !== totalPrice) {
+                document.getElementById("price_error").innerText = "Entered price does not match the total price.";
+                document.getElementById("confirm_booking").disabled = true; // Disable the confirm button
+            } else {
+                document.getElementById("price_error").innerText = "";
+                document.getElementById("confirm_booking").disabled = false; // Enable the confirm button
+            }
+        }
     </script>
 
 
@@ -243,15 +249,27 @@ if (empty($_GET['room_id'])) {
                 </div>
             </div>
         </div>
+        <h1 class="text-center mt-5 h-font fw-bold text-decoration-underline">"Discover your oasis of comfort and luxury below."</h1>
+        <div class="container mt-5">
+            <div class="row mt-5">
+                <div class="col-lg-12 col-md-6 mt-5">
+                    
+                    <video src="admin/videos/$fetch[video]"  controls loop class="room-video "></video>
+                </div>
+                
+            </div>
+        </div>
         mogambo;
 
 
         $i++;
     }
-
+    
     ?>
 
 
+
+<?php require('inc/footer.php'); ?>
     <!-- insertion of data will start from here -->
 
     <?php
@@ -309,7 +327,6 @@ if (empty($_GET['room_id'])) {
 
 
 
-    <?php require('inc/footer.php'); ?>
 
 
 

@@ -1,5 +1,5 @@
  <!-- footer starts from here -->
- <div class="container-fluid bg-light mt-5">
+ <div class="container-fluid bg-light  mt-5">
      <div class="row">
          <div class="col-lg-4 p-4">
              <h3 class="h-font fw-bold fs-3">VA9 Hotel</h3>

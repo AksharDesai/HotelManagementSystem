@@ -106,6 +106,7 @@ if (isset($_POST['save_changes'])) {
                     <form action="bookings.php" method="POST">
 
                         <p>Booking ID: <span id="bookingId"></span></p>
+                        
                         <input type="hidden" id="bookingIdInput" name="booking_id">
 
                         <select class="form-select" aria-label="Filter by status" name="status">

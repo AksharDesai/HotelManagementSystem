@@ -135,6 +135,9 @@ if (isset($_GET['rem']) && $_GET['rem'] > 0) {
 
     <?php
 
+
+
+
     if (isset($_GET['edit']) && $_GET['edit'] > 0) {
         $room_id = $_GET['edit'];
         $query = "SELECT * FROM `rooms` WHERE `room_id` = ?";
@@ -157,11 +160,44 @@ if (isset($_GET['rem']) && $_GET['rem'] > 0) {
                             document.querySelector('#editchildren').value = `$fetch[children]`;
                             
                             document.querySelector('#editimg').src = '$fetch_srcrad$fetch[image]';
+                           
                             document.querySelector('#editdesc').value = `$fetch[Description]`;
                             document.querySelector('#editrid').value = `$fetch[room_id]`;
                             
                             
                             editroom.show();
+                        </script>";
+    }
+    if (isset($_GET['video_edit_upload']) && $_GET['video_edit_upload'] > 0) {
+        $room_id = $_GET['video_edit_upload'];
+        $query = "SELECT * FROM `rooms` WHERE `room_id` = ?";
+        $stmt = mysqli_prepare($con, $query);
+        mysqli_stmt_bind_param($stmt, "i", $room_id);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $fetch = mysqli_fetch_assoc($result);
+
+        echo "
+                        <script>
+                            var video_edit_upload = new bootstrap.Modal(document.getElementById('video_edit_upload'),{
+                                keyboard:false
+                            });
+                          
+                            
+                           
+                           
+                            document.querySelector('#editvideo').src = 'videos/$fetch[video]';
+
+
+                            document.getElementById('roomIdInput').value = '$_GET[video_edit_upload]';
+
+
+                            document.getElementById('roomId').textContent ='$_GET[video_edit_upload]';
+
+
+                            
+                            
+                            video_edit_upload.show();
                         </script>";
     }
 
@@ -233,6 +269,8 @@ if (isset($_GET['rem']) && $_GET['rem'] > 0) {
 
         }
     </script>
+
+
 
 
 </body>

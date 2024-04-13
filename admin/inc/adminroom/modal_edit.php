@@ -110,7 +110,7 @@
                                     <textarea name="desc" id="editdesc" rows="4" class="form-control"></textarea>
                                 </div>
 
-                                <div class="col-12 mt-2">
+                                <div class="col-12 mt-2 mb-3">
                                     <label class="form-label fw-bold mt-2">Room Status</label>
                                     <select class="form-select" aria-label="Filter by status" name="room_status">
                                         <option value="1" selected>Available</option>
@@ -118,6 +118,11 @@
                                         <option value="3">Under Maintenance </option>
                                     </select>
                                 </div>
+
+
+
+
+
 
                             </div>
                         </div>
@@ -133,3 +138,56 @@
         </div>
     </div>
 </div>
+
+<!-- video edit modal starts from below -->
+
+
+<div class="modal fade" id="video_edit_upload" tabindex="-1" aria-labelledby="video_edit_uploadLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <form action="rooms.php" method="POST" enctype="multipart/form-data">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="video_edit_uploadLabel">Room Details</h5>
+
+            </div>
+                <div class="modal-body">
+
+
+
+                    <div id="roomDetailsContent"></div>
+
+                    
+                    <p>Room ID: <span id="roomId"></span></p>
+                        
+                        
+
+
+                    
+
+                    <div class="col-md-12 ps-0 mt-3 mb-3">
+                        <label class="input-group-text">Video</label>
+                        <input type="file" class="form-control" name="video">
+
+
+                    </div>
+
+                    <video src=" " id="editvideo" alt="" width="465px" height="200px" controls class="mb-3 apna"> <br>
+
+
+                </div>
+
+                <input type="hidden" name="roomIdInput" id="roomIdInput">
+
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark text-white" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" name="save_video">Save changes</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- video edit modal ends here -->
