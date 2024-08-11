@@ -58,7 +58,10 @@ function image_upload($img)
 
 
 
-if (e
+if (empty($_GET['room_id'])) {
+    // header("location:succesff.php");
+} else {
+
     $_SESSION['room_id'] = $_GET['room_id'];
     $_SESSION['price'] = $_GET['price'];
 
