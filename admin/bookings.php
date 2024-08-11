@@ -97,7 +97,7 @@ if (isset($_POST['save_changes'])) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Change Booking Status </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -106,14 +106,15 @@ if (isset($_POST['save_changes'])) {
                     <form action="bookings.php" method="POST">
 
                         <p>Booking ID: <span id="bookingId"></span></p>
-                        
+
                         <input type="hidden" id="bookingIdInput" name="booking_id">
 
                         <select class="form-select" aria-label="Filter by status" name="status">
 
                             <option value="1" selected>Not Checked Out Yet</option>
-                            <option value="2">Cancelled Bookings</option>
-                            <option value="3">Checked Out Bookings</option>
+                            <option value="2">Cancelled</option>
+                            <option value="3">Checked Out </option>
+                            <option value="4">Not Checked In Yet </option>
                         </select>
 
 
@@ -145,6 +146,7 @@ if (isset($_POST['save_changes'])) {
                 <option value="1" <?php if ($filter_status == 1) echo 'selected'; ?>>Not Checked Out Yet</option>
                 <option value="2" <?php if ($filter_status == 2) echo 'selected'; ?>>Cancelled Bookings</option>
                 <option value="3" <?php if ($filter_status == 3) echo 'selected'; ?>>Checked Out Bookings</option>
+                <option value="4" <?php if ($filter_status == 4) echo 'selected'; ?>>Not Checked In Yet</option>
             </select>
 
             <button type="submit" class="btn custom-bg  fw-bold" name="filter_submit">Filter</button>
@@ -186,6 +188,8 @@ if (isset($_POST['save_changes'])) {
                             $where_clause = "WHERE status = 2"; // Cancelled Bookings
                         } elseif ($filter_status == 3) {
                             $where_clause = "WHERE status = 3"; // Checked Out Bookings
+                        } elseif ($filter_status == 4) {
+                            $where_clause = "WHERE status = 4"; // Checked Out Bookings
                         }
 
                         // Modify the WHERE clause if filter_status is 0 (All Bookings)
@@ -209,6 +213,8 @@ if (isset($_POST['save_changes'])) {
                                 $print_status = '<span style="color: red;font-weight: 600;">Booking Cancelled</span>';
                             } elseif ($fetch['status'] == 3) {
                                 $print_status = '<span style="color: green;font-weight: 600;">Checked Out</span>';
+                            } elseif ($fetch['status'] == 4) {
+                                $print_status = '<span style="color: blue;font-weight: 600;">Not Checked In Yet</span>';
                             }
 
 
@@ -254,14 +260,11 @@ if (isset($_POST['save_changes'])) {
         $query = "DELETE  FROM `bookings` WHERE `booking_id`='$_GET[rem]'";
         if (mysqli_query($con, $query)) {
             echo <<<alert
-
-        <div class="alert alert-warning alert-dismissible fade show suchna-message" role="alert"">
-        <strong class="me-3">Done</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-
-     
-        alert;
+            <script>
+            window.location.href = "bookings.php";
+            </script>
+           
+            alert;
             exit();
         } else {
             echo <<<alert2

@@ -60,51 +60,37 @@ session_start();
     }
 
     $query = "SELECT `booking_id`, `check_in`, `check_out`, `room_id`, `name`, `email` FROM `bookings`
-    INNER JOIN `registered_users` ON bookings.user_id = registered_users.user_id WHERE bookings.user_id = '$_SESSION[user_id]'";
-
-
+    INNER JOIN `registered_users` ON bookings.user_id = registered_users.user_id WHERE bookings.user_id = '$_SESSION[user_id]' LIMIT 1";
 
     // Execute the query
     $result = mysqli_query($con, $query);
 
     // Check if the query executed successfully
     if ($result) {
-        $num_bookings = mysqli_num_rows($result);
-        if ($num_bookings > 1) {
-            echo "<h3 class='text-center custom-bg'>We are happy that you have booked multiple rooms!</h3>";
-        }
-        while ($row = mysqli_fetch_assoc($result)) {
-            // Access data from the $row variable
-            // Example: $row['bookings_column_name'], $row['rooms_column_name'], $row['users_column_name']
-            // Display or process the data as needed
+        $row = mysqli_fetch_assoc($result); // Fetch only one row
 
-            echo <<<krishna
-    
-
-    
-            <div class="card center border-5 border-dark" style="width: 25rem;">
+        // Access data from the $row variable
+        // Example: $row['bookings_column_name'], $row['rooms_column_name'], $row['users_column_name']
+        // Display or process the data as needed
+        echo <<<krishna
+        <div class="card center border-5 border-dark" style="width: 25rem;">
             <div class="card-body">
-            <h5 class="">Name :- $row[name]</h5>
-            <h5 class="">$row[email]</h5>
-            <p>Booking-ID :- $row[booking_id] <br> Room-Number :- $row[room_id] <br> Check_in-DATE :- $row[check_in] <br> Check_out-DATE :- $row[check_out] </p>
+                <h5 class="">Name :- {$row['name']}</h5>
+                <h5 class="">{$row['email']}</h5>
+                <p>Booking-ID :- {$row['booking_id']} <br> Room-Number :- {$row['room_id']} <br> Check_in-DATE :- {$row['check_in']} <br> Check_out-DATE :- {$row['check_out']} </p>
             </div>
-            
             <img src="images\card-image.jpg" class="img" alt="...">
-            </div>
-            <br>
-            <h6 class="text-center fw-light">Make Sure to take a screenshot of the E-Card </h6>
-            
-            krishna;
-        }
+        </div>
+        <br>
+        <h6 class="text-center fw-light">Make Sure to take a screenshot of the E-Card </h6>
+        krishna;
     } else {
         // Handle the case where the query fails
         echo "Error: " . mysqli_error($con);
     }
 
     // Close the connection
-
-
-    
+    mysqli_close($con);
     ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 

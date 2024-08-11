@@ -8,7 +8,6 @@ session_start();
 
 
 
-
 // it is the function of uploading an image vv
 function image_upload($img)
 {
@@ -75,6 +74,45 @@ if (isset($_POST["login"])) {
 if (isset($_POST['register'])) {
 
 
+
+    $email = $_POST['email'];
+    $valid_domains = array("gmail.com", "yahoo.com", "hotmail.com"); // Add more common domains as needed
+
+    if (!preg_match("/^[a-zA-Z0-9._%+-]+@(" . implode("|", $valid_domains) . ")$/", $email)) {
+        echo "
+        <script>
+        alert('Invalid email format or domain. Please use a valid email address like gmail.com, yahoo.com, etc.');
+        window.location.href='index.php';
+        </script>
+        ";
+        exit; // Exit the script if email format is invalid
+    }
+
+
+    $phone_number = $_POST['phoneno'];
+
+    if (!preg_match("/^\d{10,}$/", $phone_number)) {
+        echo "
+        <script>
+        alert('Invalid phone number format. Please enter a valid phone number with at least 10 digits.');
+        window.location.href='index.php';
+        </script>
+        ";
+        exit; // Exit the script if phone number format is invalid
+    }
+
+
+    $password = $_POST['password'];
+
+    if (!preg_match("/^(?=.*[^\w\s]).{4,}$/", $password)) {
+        echo "
+        <script>
+        alert('Invalid password format. Password must be at least 4 characters long and contain at least one special character.');
+        window.location.href='index.php';
+        </script>
+        ";
+        exit; // Exit the script if password format is invalid
+    }
 
 
     $user_exist_query = "SELECT * FROM  `registered_users` WHERE `phoneno` ='$_POST[phoneno]' OR 'email' ='$_POST[email]' ";

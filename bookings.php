@@ -34,7 +34,10 @@ if (isset($_SESSION['name'])) {
     // Close database connection (assuming it's no longer needed)
     // mysqli_close($con);
 } else {
-    echo "User not logged in.";
+    echo '<div class="alert alert-warning alert-dismissible fade show" role="alert" style="width: 100%;">
+    User not logged in. Please <a href="#loginModal" class="alert-link" data-bs-toggle="modal">login</a> first.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>';
 }
 
 
@@ -55,10 +58,7 @@ function image_upload($img)
 
 
 
-if (empty($_GET['room_id'])) {
-    header("location:successfull.php");
-} else {
-
+if (e
     $_SESSION['room_id'] = $_GET['room_id'];
     $_SESSION['price'] = $_GET['price'];
 
@@ -69,7 +69,47 @@ if (empty($_GET['room_id'])) {
     // echo $_SESSION['room_id'] . "< SESSION<br>";
     // echo $_SESSION['price'] . "< PRICE SESSION<br>";
 }
+if (isset($_POST['confirm_booking']) && isset($_POST['room_id'])) {
+    $check_in = $_POST['check_in'];
+    $check_out = $_POST['check_out'];
 
+    if ($check_in == $check_out) {
+        echo '<script>alert("Check-in and check-out dates cannot be equal."); window.location.href = "room.php";</script>';
+        exit(); // Exit the script after redirection
+    } elseif ($check_in < date('Y-m-d')) {
+        echo '<script>alert("Check-in date cannot be in the past."); window.location.href = "room.php";</script>';
+        exit(); // Exit the script after redirection
+    } elseif (strtotime($check_out) - strtotime($check_in) > 15778463) { // 6 months in seconds
+        echo '<script>alert("The difference between check-in and check-out dates cannot be more than 6 months."); window.location.href = "room.php";</script>';
+        exit(); // Exit the script after redirection
+    } elseif ($_SESSION['ban'] == 1) {
+        echo '<script>alert("You are banned from booking any room please contact the admin."); window.location.href = "contactus.php";</script>';
+        exit();
+    } else {
+        // Calculate the number of days between check-in and check-out dates
+        $days_difference = (int)floor((strtotime($check_out) - strtotime($check_in)) / (60 * 60 * 24));
+        $total_price = $days_difference * $price;
+
+        $insert_query = "INSERT INTO `bookings`(`user_id`, `room_id`, `check_in`, `check_out`, `total_price`) VALUES ('$user[user_id]','$_POST[room_id]','$check_in','$check_out','$_POST[payment_amount]')";
+        $result_insert = mysqli_query($con, $insert_query);
+
+        if ($result_insert) {
+            // Decrease room quantity by 1
+            $update_query = "UPDATE `rooms` SET `quantity` = `quantity` - 1 WHERE `room_id` = '$_POST[room_id]' AND `quantity` > 0";
+            $result_update = mysqli_query($con, $update_query);
+
+            if ($result_update) {
+                echo '<div class="alert alert-success" role="alert">Room booked successfully.</div>';
+                // Redirect to successfull.php after a short delay (e.g., 2 seconds)
+                header("location:successfull.php");
+            } else {
+                echo '<div class="alert alert-danger" role="alert">Failed to update room quantity.</div>';
+            }
+        } else {
+            echo "Failed to insert booking.";
+        }
+    }
+}
 ?>
 
 
@@ -93,14 +133,13 @@ if (empty($_GET['room_id'])) {
         .h-font {
             font-family: 'Merienda', cursive !important;
         }
-    
+
         video {
             width: 100%;
-            height: 90% ;
+            height: 90%;
             object-fit: cover;
-            
-        }
 
+        }
     </style>
 
     <script>
@@ -240,8 +279,7 @@ if (empty($_GET['room_id'])) {
                             
                                 
                             <div class="col-md-12  d-flex justify-content-center"> <!-- Center Confirm Booking button -->
-                                <button type="submit" id="confirm_booking" name="confirm_booking" class="btn btn-primary text-white custom-bg shadow-none mb-2 mt-3 w-100" disabled>Confirm Booking</button> <!-- Make button 100% width -->
-                            </div>
+                            <button type="submit" id="confirm_booking" name="confirm_booking" class="btn btn-primary text-white custom-bg shadow-none mb-2 mt-3 w-100" disabled>Confirm Booking</button>                            </div>
 
                             </form> <!-- End form tag -->
                         </div>
@@ -254,7 +292,7 @@ if (empty($_GET['room_id'])) {
             <div class="row mt-5">
                 <div class="col-lg-12 col-md-6 mt-5">
                     
-                    <video src="admin/videos/$fetch[video]"  controls loop class="room-video "></video>
+                    <video src="admin/videos/$fetch[video]"  controls loop autoplay muted class="room-video "></video>
                 </div>
                 
             </div>
@@ -264,57 +302,16 @@ if (empty($_GET['room_id'])) {
 
         $i++;
     }
-    
+
     ?>
 
 
 
-<?php require('inc/footer.php'); ?>
+    <?php require('inc/footer.php'); ?>
     <!-- insertion of data will start from here -->
 
     <?php
 
-    if (isset($_POST['confirm_booking']) && isset($_POST['room_id'])) {
-
-
-        $check_in = $_POST['check_in'];
-        $check_out = $_POST['check_out'];
-
-
-
-
-        if ($check_in == $check_out) {
-            echo "Check-in and check-out dates cannot be equal.";
-        } elseif ($check_in < date('Y-m-d')) {
-            echo "Check-in date cannot be in the past.";
-        } elseif (strtotime($check_out) - strtotime($check_in) > 15778463) { // 6 months in seconds
-            echo "The difference between check-in and check-out dates cannot be more than 6 months.";
-        } else {
-            // Calculate the number of days between check-in and check-out dates
-            $days_difference = (int)floor((strtotime($check_out) - strtotime($check_in)) / (60 * 60 * 24));
-            $total_price = $days_difference * $price;
-
-            echo "total price = " . $total_price;
-
-            $insert_query = "INSERT INTO `bookings`(`user_id`, `room_id`, `check_in`, `check_out`, `total_price`) VALUES ('$user[user_id]','$_POST[room_id]','$check_in','$check_out','$_POST[payment_amount]')";
-            $result_insert = mysqli_query($con, $insert_query);
-
-            if ($result_insert) {
-                // Decrease room quantity by 1
-                $update_query = "UPDATE `rooms` SET `quantity` = `quantity` - 1 WHERE `room_id` = '$_POST[room_id]' AND `quantity` > 0";
-                $result_update = mysqli_query($con, $update_query);
-
-                if ($result_update) {
-                    echo "Room booked successfully.";
-                } else {
-                    echo "Failed to update room quantity.";
-                }
-            } else {
-                echo "Failed to insert booking.";
-            }
-        }
-        unset($_SESSION['room_id']);
-    }
 
     ?>
 

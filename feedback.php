@@ -1,6 +1,19 @@
 <?php
 require('connection.php');
 session_start();
+
+
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && isset($_SESSION['ban']) && $_SESSION['ban'] == 1) {
+    echo <<<alert
+
+    <div class="alert ban alert-danger alert-dismissible fade show position-fixed" role="alert""><i class="bi bi-exclamation-triangle-fill"></i>
+    <strong class="me-3">"Access Denied:</strong>We regret to inform you that your access to this platform has been suspended due to violations of our terms of service,If you believe this action was taken in error, please contact our support team for assistance "<a class=" me-2 text-dark " href="contactus.php">Contact Us</a>
+    <a class=" me-2 text-dark " href="logout.php">Log Out</a>
+    </div>
+    
+    
+    alert;
+}
 ?>
 
 <!DOCTYPE html>
@@ -53,13 +66,16 @@ session_start();
             width: 70%;
             text-align: center;
         }
+        .ban {
+            z-index: 1040;
+        }
     </style>
 </head>
 
 <body>
     <?php require('inc/header.php'); ?>
     <div class="my-5 px-4">
-        <h2 class="fw-bold h-font text-center">Feedbacks</h2>
+        <h2 class="fw-bold h-font text-center">Testimonials</h2>
         <div class="hline bg-dark"></div>
     </div>
     <div class="container">

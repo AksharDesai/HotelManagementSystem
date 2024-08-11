@@ -44,7 +44,7 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-lg-end">
                         <li><a class="dropdown-item" href="profile.php">Profile</a></li>
-                        <li><a class="dropdown-item" href="successfull.php">Booking</a></li>
+                        <li><a class="dropdown-item" href="user_booking_panel.php">Booking</a></li>
                         <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                     </ul>
                     </div>
@@ -78,7 +78,7 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-lg-end">
                         <li><a class="dropdown-item" href="profile.php">Profile</a></li>
-                        <li><a class="dropdown-item" href="successfull.php">Booking</a></li>
+                        <li><a class="dropdown-item" href="user_booking_panel.php">Booking</a></li>
                         <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                     </ul>
                     </div>

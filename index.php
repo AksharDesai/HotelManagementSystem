@@ -60,6 +60,8 @@ session_start();
 
     <?php
 
+
+
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && isset($_SESSION['ban']) && $_SESSION['ban'] == 1) {
         echo <<<alert
 
@@ -85,7 +87,7 @@ session_start();
 
 
     <!-- carousel -->
-    <div class="container-fluid mt-4 px-lg-4 " >
+    <div class="container-fluid mt-4 px-lg-4 ">
 
         <div id="carouselExampleFade" class="carousel slide " data-bs-ride="carousel">
             <div class="carousel-inner border border-5 border-dark">
@@ -154,6 +156,22 @@ session_start();
             $fetch_srcrad = FETCH_SRCrad;
 
             while ($fetch = mysqli_fetch_assoc($result)) {
+                $bookNowButton = '';
+                $feedbackbutton = '';
+
+
+
+                if (isset($_SESSION['ban']) && $_SESSION['ban'] == 1) {
+                    $feedbackbutton = '<a href="#" class="btn btn-outline-dark shadow-none disabled" aria-disabled="true">Feedbacks</a>';
+                } else {
+                    $feedbackbutton = '<a href="feedback.php" class="btn btn-outline-dark shadow-none">Feedbacks</a>';
+                }
+
+                if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
+                    $bookNowButton = '<a href="bookings.php?room_id=' . $fetch['room_id'] . '&price=' . $fetch['price'] . '" class="btn text-white custom-bg shadow-none">Book Now</a>';
+                } else {
+                    $bookNowButton = '<a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="btn text-white custom-bg shadow-none">Book Now</a>';
+                }
 
 
                 echo <<<indexroomprint
@@ -189,11 +207,8 @@ session_start();
                                         </div>
                                         <div class="d-flex justify-content-evenly mb-2">
                                             
-                                        
-                                                
-                                                <a href="" class="btn text-white custom-bg shadow-none">Book Now</a>
-                                                <a href="#" class="btn btn-outline-dark shadow-none">More Details</a>
-                                            
+                                        $bookNowButton
+                                        $feedbackbutton                                            
                                             
                                             
                                         </div>
@@ -202,6 +217,9 @@ session_start();
                             </div>
 
                             indexroomprint;
+
+                $_SESSION['price'] = $fetch['price'];
+                $i++;
             }
 
 
@@ -395,6 +413,7 @@ session_start();
             }
         });
     </script>
+
 </body>
 
 </html>

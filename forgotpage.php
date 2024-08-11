@@ -8,28 +8,52 @@
     <style>
         h1 {
             text-align: center;
+        }
 
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .form-container img{
+            width: 300px;
+            height: 300px;
         }
     </style>
 </head>
 
 <body>
-    <h1>Welcome Welcome buddy</h1>
-    <form action="forgotpassword.php" method="POST">
-        <div class="mb-3">
-            <label class="form-label">Email address</label>
-            <input type="email" class="form-control" aria-describedby="email" name="email" required>
-        </div>
+<?php require('inc/header.php'); ?>
+    <div class="form-container bg-white shadow-lg">
 
-        <div class="d-flex align-items-center justify-content-between">
-            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Go Back</button>
-            <button type="submit" class="btn btn-dark reset" name="send-reset-link">Send</button>
-        </div>
-    </form>
+    <img src="images\forgot.png" alt="">
+        
+        <form action="forgotpassword.php" method="POST">
+            <div class="form-group">
+                <label class="form-label">Email address</label>
+                <input type="email" class="form-control" aria-describedby="email" name="email" required>
+            </div>
+
+            <div class="btn-container">
+                <button type="button" class="btn btn-success me-4" data-bs-dismiss="modal">Go Back</button>
+                <button type="submit" class="btn btn-dark reset" name="send-reset-link">Send</button>
+            </div>
+        </form>
+    </div>
 
 </body>
 
 </html>
-
-
-

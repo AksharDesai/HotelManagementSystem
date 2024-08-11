@@ -27,6 +27,7 @@ session_start();
         .h-font {
             font-family: 'Merienda', cursive;
         }
+
         .pop:hover {
             border-top-color: var(--teal) !important;
             transform: scale(1.03);
